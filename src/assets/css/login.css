@@ -1,0 +1,91 @@
+/* Página completa */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh; /* Ajusta todo a la altura de la pantalla */
+}
+
+.login-section {
+  background: linear-gradient(145deg, #001f3f, #002d6f, #003b80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ffffff;
+}
+
+.login-form {
+  background: linear-gradient(145deg, #3a536b, #4e6a82);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 -10px 30px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  width: 400px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.login-form h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #00bfff;
+}
+
+.login-form p {
+  font-size: 1.2rem;
+  color: #a9b2c3;
+}
+
+/* Seccion footer */
+/* Sección Footer */
+
+.footer-section {
+  background: #ffffff; /* Fondo blanco */
+  color: #1b1f3b; /* Azul marino */
+  padding: 30px 0;
+  font-size: 0.9rem;
+}
+
+.footer-section h5 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-section a.footer-link {
+  color: #1b1f3b; /* Azul marino */
+  text-decoration: none;
+}
+
+.footer-section a.footer-link:hover {
+  color: #16c79a; /* Verde fosforescente */
+  text-decoration: underline;
+}
+
+.footer-section p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.footer-line {
+  border-top: 1px solid #1b1f3b; /* Línea azul marino */
+  margin: 20px auto;
+  width: 100%; /* Línea de lado a lado */
+}
+
+.footer-credits {
+  font-size: 0.75rem; /* Letra más pequeña */
+  color: #1b1f3b;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.footer-icon {
+  color: #61dafb; /* Color oficial de React */
+  font-size: 1.2rem;
+  margin-left: 5px; /* Espaciado para que no se pegue al texto */
+  vertical-align: middle;
+}

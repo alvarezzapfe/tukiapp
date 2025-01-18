@@ -1,0 +1,423 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: bold, sans-serif;
+  color: #d4f1f4; /* Verde azulado claro */
+  background-color: #1b1f3b; /* Azul marino oscuro */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+}
+
+/* color: background: linear-gradient(rgba(27, 31, 59, 0.8), rgba(17, 105, 142, 0.6))  */
+
+/* Hero Section */
+.hero_area {
+  margin: 0;
+  padding-top: 80px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  background: url("/src/assets/images/hero-bg.png") no-repeat center
+      center/cover,
+    /* Imagen detrás */
+      linear-gradient(
+        rgba(27, 31, 59, 0.8),
+        /* Color predominante */ rgba(17, 105, 142, 0.6)
+      ); /* Gradiente superpuesto */
+  background-blend-mode: overlay; /* Mezclar gradiente y fondo */
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3); /* Sombra interior */
+  position: relative; /* Necesario para usar pseudo-elementos */
+  overflow: hidden; /* Asegura que no se desborden elementos */
+}
+
+.hero_area::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit; /* Usa la imagen y gradiente actuales */
+  filter: blur(15px); /* Aplica el desenfoque */
+  z-index: -1; /* Coloca detrás del contenido */
+}
+
+/* Animación de partículas decorativas */
+.hero_area .particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(22, 199, 154, 0.8); /* Verde fosforescente */
+  border-radius: 50%;
+  animation: float 6s infinite ease-in-out;
+}
+
+.hero_area .particle:nth-child(1) {
+  top: 20%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.hero_area .particle:nth-child(2) {
+  top: 40%;
+  left: 70%;
+  animation-delay: 1s;
+}
+
+.hero_area .particle:nth-child(3) {
+  top: 60%;
+  left: 30%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.2);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Botón */
+.hero_area button {
+  background-color: #16c79a;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero_area button:hover {
+  background-color: #004d99;
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Global Button Styles */
+button {
+  background-color: #11698e;
+  color: #16c79a;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  background-color: #16c79a;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px #16c79a;
+}
+
+/* Navbar Styles en archivo separado */
+
+/* About Section */
+
+#about {
+  padding: 70px 20px;
+  background: white;
+  color: #333;
+  text-align: center;
+}
+
+#about h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#about p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Estilo de Logotipo */
+
+/* Sección Columnas */
+/* Sección Columnas */
+#columns {
+  background: linear-gradient(rgba(27, 31, 59, 0.8), rgba(17, 105, 142, 0.6));
+  color: #ffffff;
+  padding: 1500px 40px;
+}
+
+/* Contenedor de las cajas */
+/* Contenedor de las cajas */
+.column-card {
+  background: rgba(17, 105, 142, 0.6);
+  color: white;
+  padding: 28px; /* Reducido al 70% de 40px */
+  width: 70%; /* Ajusta al 70% del tamaño original */
+  margin: 0 auto; /* Centra las cajas horizontalmente */
+  border-radius: 20px; /* Opcional: Ajustar bordes redondeados */
+  text-align: center;
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.3); /* Reducido proporcionalmente */
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Resaltar en hover */
+.column-card:hover {
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(22, 199, 154, 0.7); /* Brillo */
+}
+
+/* Círculo de enumeración */
+/* Círculo de enumeración */
+.circle-enumeration {
+  position: left;
+  top: -30px; /* Ajusta la posición del círculo */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f48fb1;
+  color: white;
+  font-size: 1.4rem; /* Reducido proporcionalmente */
+  font-weight: bold;
+  border-radius: 50%;
+  width: 42px; /* Reducido al 70% */
+  height: 42px; /* Reducido al 70% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2); /* Reducido proporcionalmente */
+}
+
+/* Flecha animada en forma de "S" */
+/* Línea del rayo eléctrico */
+.arrow-electric {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: calc(100% - 100px); /* Ajusta la altura para que no toque el footer */
+  background: linear-gradient(
+    180deg,
+    transparent,
+    #16c79a 25%,
+    transparent 50%,
+    #f4f5fa 75%
+  );
+  background-size: 100% 200%;
+  animation: electric-flow 2s infinite linear;
+  z-index: -1; /* Debajo de las cajas */
+}
+
+/* Efecto de animación del rayo */
+@keyframes electric-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+/* Brillo de las cajas al pasar el rayo */
+.column-card.highlight {
+  box-shadow: 0 0 20px 10px rgba(22, 199, 154, 0.5);
+  transform: scale(1.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Sección Nuestro Modelo */
+/* Modelo Section */
+.modelo-section {
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 300px 0; /* Área 200% más grande */
+}
+
+.modelo-section h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #11698e; /* Verde azulado profundo */
+}
+
+.modelo-section p {
+  font-size: 1.2rem;
+  color: #4e6a82; /* Azul oscuro suave */
+}
+
+/* Estilo de las tarjetas */
+.modelo-card {
+  background: linear-gradient(
+    145deg,
+    #dff3f5,
+    #bfe4e7
+  ); /* Tonos azul verdoso */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  height: 250px; /* Tamaño inicial */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.modelo-card:hover {
+  transform: scale(1.025); /* Incrementa el tamaño al pasar el cursor */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Aumenta la sombra */
+}
+
+.modelo-card .icono {
+  font-size: 3rem; /* Tamaño del ícono */
+  color: #16c79a; /* Verde menta brillante */
+}
+
+.modelo-card h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #003b80; /* Azul profundo */
+}
+
+.modelo-card p {
+  font-size: 1rem;
+  color: #1e2a38; /* Azul grisáceo */
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+  .modelo-card {
+    height: auto; /* Ajusta la altura en pantallas pequeñas */
+  }
+}
+
+/* Sección Footer */
+
+.footer-section {
+  background: #ffffff; /* Fondo blanco */
+  color: #1b1f3b; /* Azul marino */
+  padding: 80px 0;
+  font-size: 0.9rem;
+}
+
+.footer-section h5 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-section a.footer-link {
+  color: #1b1f3b; /* Azul marino */
+  text-decoration: none;
+}
+
+.footer-section a.footer-link:hover {
+  color: #16c79a; /* Verde fosforescente */
+  text-decoration: underline;
+}
+
+.footer-section p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.footer-line {
+  border-top: 1px solid #1b1f3b; /* Línea azul marino */
+  margin: 20px auto;
+  width: 100%; /* Línea de lado a lado */
+}
+
+.footer-credits {
+  font-size: 0.75rem; /* Letra más pequeña */
+  color: #1b1f3b;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.footer-icon {
+  color: #61dafb; /* Color oficial de React */
+  font-size: 1.2rem;
+  margin-left: 5px; /* Espaciado para que no se pegue al texto */
+  vertical-align: middle;
+}
+
+/*   LOGO SMALL */
+
+/* Tamaño personalizado para el logotipo */
+.logo-small {
+  width: 40px; /* Cambia el tamaño según lo necesario */
+  height: auto; /* Mantén la proporción de aspecto */
+  margin-top: 10px; /* Espaciado opcional */
+  transition: transform 0.2s ease-in-out; /* Para animación */
+}
+
+/* Efecto hover para el logotipo */
+.logo-small:hover {
+  transform: scale(1.5); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
+@media (max-width: 768px) {
+  .logo-small {
+    width: 80px; /* Más pequeño en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-small {
+    width: 60px; /* Aún más pequeño en pantallas muy pequeñas */
+  }
+}
+
+/*   AOS   */
+/* Animaciones de entrada */
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-aos="fade-left"] {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos="fade-left"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-aos="fade-right"] {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos="fade-right"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}

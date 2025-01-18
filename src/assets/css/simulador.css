@@ -1,0 +1,229 @@
+/* Página completa */
+.simulador-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+/* Sección principal */
+.simulador-section {
+  background: linear-gradient(145deg, #001f3f, #002d6f, #003b80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ffffff;
+}
+
+/* Caja principal */
+.simulador-form {
+  background: linear-gradient(145deg, #3a536b, #4e6a82);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 -10px 30px rgba(0, 0, 0, 0.2);
+  padding: 50px;
+  width: 600px;
+  max-width: 90%;
+  text-align: center;
+  color: #ffffff;
+}
+
+.simulador-form h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #00bfff;
+}
+
+.simulador-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Caja de resultados */
+.resultado-box {
+  background: #002d6f;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #ffffff;
+  animation: fadeIn 1s ease-in-out;
+  width: 600px;
+}
+
+.resultado-box h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.resultado-box p {
+  font-size: 1rem;
+  color: #a9b2c3;
+}
+
+/* Tabla de resultados */
+.resultado-tabla {
+  margin: 20px auto;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.resultado-tabla th,
+.resultado-tabla td {
+  border: 1px solid #4facfe;
+  padding: 10px;
+  color: #ffffff;
+}
+
+.resultado-tabla th {
+  background: #004d99;
+  font-weight: bold;
+}
+
+.resultado-tabla tr:nth-child(even) {
+  background: #003b80;
+}
+
+.resultado-tabla tr:nth-child(odd) {
+  background: #1e2a38;
+}
+
+.resultado-box .btn-reset {
+  background: linear-gradient(145deg, #1e90ff, #00bfff);
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.resultado-box .btn-reset:hover {
+  transform: scale(1.1);
+  background: linear-gradient(145deg, #004d99, #1e90ff);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Loading Circle */
+/* Loading Circle */
+.loading-wrapper {
+  position: relative;
+  height: 40px; /* Altura fija igual al botón */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-circle {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  visibility: hidden; /* Oculto por defecto */
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+}
+
+.loading-circle.visible {
+  visibility: visible; /* Mostrar durante la carga */
+  opacity: 1;
+}
+
+.loading-circle .circle {
+  width: 20px; /* Tamaño del círculo */
+  height: 20px;
+  border: 3px solid rgba(22, 199, 154, 0.5);
+  border-top: 3px solid #16c79a; /* Verde fosforescente */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-circle p {
+  margin-top: 5px;
+  font-size: 0.85rem; /* Texto más pequeño */
+  color: #16c79a; /* Verde fosforescente */
+  font-weight: bold;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Botón oculto durante la carga */
+.loading-wrapper .btn-submit.hidden {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+}
+
+/* Simulador Form Styles */
+.simulador-form {
+  width: 600px;
+  /* ... (resto del CSS sigue igual) */
+}
+
+/* Resultado Box */
+.resultado-box {
+  /* Misma estructura que antes */
+  animation: fadeIn 0.5s ease-in-out; /* Más rápido */
+}
+
+/* Sección Footer */
+
+.footer-section {
+  background: #ffffff; /* Fondo blanco */
+  color: #1b1f3b; /* Azul marino */
+  padding: 30px 0;
+  font-size: 0.9rem;
+}
+
+.footer-section h5 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-section a.footer-link {
+  color: #1b1f3b; /* Azul marino */
+  text-decoration: none;
+}
+
+.footer-section a.footer-link:hover {
+  color: #16c79a; /* Verde fosforescente */
+  text-decoration: underline;
+}
+
+.footer-section p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.footer-line {
+  border-top: 1px solid #1b1f3b; /* Línea azul marino */
+  margin: 20px auto;
+  width: 100%; /* Línea de lado a lado */
+}
+
+.footer-credits {
+  font-size: 0.75rem; /* Letra más pequeña */
+  color: #1b1f3b;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.footer-icon {
+  color: #61dafb; /* Color oficial de React */
+  font-size: 1.2rem;
+  margin-left: 5px; /* Espaciado para que no se pegue al texto */
+  vertical-align: middle;
+}
