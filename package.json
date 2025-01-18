@@ -37,6 +37,11 @@
       "last 1 safari version"
     ]
   },
+ 
+"engines": {
+  "node": "16.x"
+},
+
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.0.7"
