@@ -119,12 +119,42 @@
 }
 
 /* Ajustes para pantallas pequeñas */
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
-  .navbar-menu {
-    display: none;
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .menu-toggle {
     display: flex;
+  }
+
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-in-out;
+  }
+
+  .navbar-menu.show {
+    display: flex;
+  }
+
+  .navbar-menu li {
+    margin: 5px 0;
+  }
+
+  .navbar-menu li a {
+    padding: 10px 15px;
+    text-align: left;
   }
 }
