@@ -1,15 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        // Opciones globales para SCSS (si aplica)
-        additionalData: `@import "./src/assets/styles/variables.scss";`,
-      },
-    },
+  build: {
+    outDir: "dist", // Vite usa 'dist' por defecto
   },
-  base: "/", // Ajusta esto si despliegas en un subdirectorio
 });
