@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./assets/css/simulador.css";
 import logo from "./assets/images/logo1.png";
+import Navbar from "./components/Navbar";
 
 const Simulador = () => {
   const [monto, setMonto] = useState("");

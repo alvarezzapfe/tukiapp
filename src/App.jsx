@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Agregado useState y useEffect
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/navbar.css";
@@ -8,31 +8,22 @@ import "./assets/css/solicitud.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Solicitud from "./solicitud"; // Si no existe, crea el componente
+import Solicitud from "./solicitud";
 import Login from "./login";
 import Simulador from "./simulador";
-
-// Importar la imagen
+import Navbar from "./components/Navbar"; // Componente Navbar
 import logo from "./assets/images/logo1.png";
 
 const Home = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
 
   useEffect(() => {
     AOS.init({
-      duration: 600, // Duración de animaciones
+      duration: 600,
       easing: "ease-out-cubic",
-      once: true, // Animar solo una vez
+      once: true,
     });
   }, []);
-
-  // Rayo electríco que baja
-
-  const [activeCard, setActiveCard] = useState(-1); // Caja activa
 
   const handleScroll = () => {
     const sections = document.querySelectorAll(".column-card-container");
@@ -42,7 +33,7 @@ const Home = () => {
         rect.top < window.innerHeight / 2 &&
         rect.bottom > window.innerHeight / 2
       ) {
-        setActiveCard(index); // Actualiza la caja activa
+        setActiveCard(index);
       }
     });
   };
@@ -54,57 +45,15 @@ const Home = () => {
 
   return (
     <div>
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="navbar-container">
-          <a href="#" className="navbar-logo">
-            <img src={logo} alt="Logotipo" className="logo-small" />
-          </a>
-          <button className="menu-toggle" type="button" onClick={toggleMenu}>
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </button>
-          <div className={`navbar-menu ${menuOpen ? "show" : ""}`}>
-            <ul className="navbar-menu">
-              <li>
-                <a href="#hero">Inicio</a>
-              </li>
-              <li>
-                <a href="#about">Acerca de</a>
-              </li>
-
-              <li>
-                <a href="#columns">Productos</a>
-              </li>
-              <li>
-                <a href="#modelo">Modelo</a>
-              </li>
-              <li>
-                <a href="/Simulador">Simulador</a>
-              </li>
-              <li>
-                <a href="/solicitud">Solicitud</a>
-              </li>
-              <li>
-                <a href="/login" className="btn btn-outline-light ms-3">
-                  Login
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
       <header
         id="hero"
         className="hero_area text-center text-white"
         data-aos="fade-up"
       >
-        {/* Partículas decorativas */}
         <div className="particle"></div>
         <div className="particle"></div>
         <div className="particle"></div>
-
         <div className="container py-5">
           <h1 className="display-4">Bienvenido a TukiApp</h1>
           <p className="lead">
@@ -113,35 +62,22 @@ const Home = () => {
           <button className="btn btn-light btn-lg mt-3">Conócenos</button>
         </div>
       </header>
-
-      {/* Sección 1:  About Section */}
       <section id="about" className="py-5 bg-light text-center">
         <div className="container">
           <h2 className="mb-4" data-aos="fade-up">
             Acerca de Nosotros
           </h2>
-          <div className="text-muted" data-aos="fade-up">
-            <p>
-              Tuki es una plataforma que utilza un modelo propio e Inteligencia
-              Artificial para facilitar acceso a crédito simple.
-            </p>
-            <p></p>
-          </div>
-
-          <img src={logo} alt="Logotipo" className="logo-small" />
+          <p className="text-muted" data-aos="fade-up">
+            Tuki es una plataforma que utiliza un modelo propio e Inteligencia
+            Artificial para facilitar acceso a crédito simple.
+          </p>
+          <img src={logo} alt="Logotipo" className="logo-small mt-4" />
         </div>
       </section>
-      {/* Sección 2 */}
-
-      {/* Contact Section en otro view */}
-
-      {/* Sección 3: Columnas */}
-      {/* Sección 3: Columnas */}
       <section id="columns" className="py-5 text-center" data-aos="fade-up">
         <div className="container expanded-section position-relative">
           <h2 className="mb-5">Explora Más</h2>
           <h3 className="mb-5">Nuestro proceso es simple</h3>
-
           {/* Rayo eléctrico */}
           <div className="arrow-electric"></div>
 
@@ -201,9 +137,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sección 4: Modelo */}
-      {/* Modelo Section */}
-      {/* Modelo Section */}
+      {/*     */}
       <section id="modelo" className="py-5 text-center modelo-section">
         <div className="container">
           <h1 className="mb-4">Nuestro Modelo</h1>

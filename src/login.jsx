@@ -2,44 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./assets/css/login.css";
 import logo from "./assets/images/logo1.png"; // Asegúrate de que la ruta sea correcta
+import Navbar from "./components/Navbar";
 
 const Login = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   return (
     <div className="login-page">
       {/* Navbar */}
-      <nav className="navbar">
-        <div className="navbar-container">
-          <a href="#" className="navbar-logo">
-            <img src={logo} alt="Logotipo" className="logo-small" />
-          </a>
-          <button className="menu-toggle" type="button" onClick={toggleMenu}>
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </button>
-          <div className={`navbar-menu ${menuOpen ? "show" : ""}`}>
-            <ul className="navbar-menu">
-              <li>
-                <Link to="/">Inicio</Link>
-              </li>
-              <li>
-                <Link to="/solicitud">Solicitud</Link>
-              </li>
-              <li>
-                <Link to="/login" className="btn btn-outline-light ms-3">
-                  Login
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Login Section */}
       <div className="login-section">
