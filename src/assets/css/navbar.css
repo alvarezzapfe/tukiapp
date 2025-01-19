@@ -124,12 +124,28 @@
   .navbar-container {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 
+  /* Botón de menú hamburguesa */
   .menu-toggle {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
   }
 
+  .menu-toggle div {
+    width: 100%;
+    height: 3px;
+    background-color: #000; /* Cambia el color según el diseño */
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Ocultar el menú por defecto */
   .navbar-menu {
     display: none;
     flex-direction: column;
@@ -145,6 +161,7 @@
     animation: slideIn 0.3s ease-in-out;
   }
 
+  /* Mostrar el menú cuando está activo */
   .navbar-menu.show {
     display: flex;
   }
@@ -156,5 +173,18 @@
   .navbar-menu li a {
     padding: 10px 15px;
     text-align: left;
+    font-weight: 300; /* Texto delgado */
+  }
+}
+
+/* Animación del menú hamburguesa */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

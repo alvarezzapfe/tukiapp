@@ -55,7 +55,7 @@ const Home = () => {
         <div className="particle"></div>
         <div className="particle"></div>
         <div className="container py-5">
-          <h1 className="display-4">Bienvenido a TukiApp</h1>
+          <h1 className="display-4">Bienvenido a TukiApp Tuktuk</h1>
           <p className="lead">
             Acceso fácil a crédito justo para la Pequeña Empresa en México.
           </p>
