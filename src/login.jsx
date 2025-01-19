@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import "./assets/css/login.css";
 import logo from "./assets/images/logo1.png"; // Asegúrate de que la ruta sea correcta
 import Navbar from "./components/Navbar";
 
 const Login = () => {
+  const navigate = useNavigate(); // Hook para navegación
+
   return (
     <div className="login-page">
       {/* Navbar */}
@@ -15,6 +17,12 @@ const Login = () => {
         <div className="login-form">
           <h2>Portal en Desarrollo</h2>
           <p>Lanzamiento Junio 2025</p>
+          <button
+            className="go-to-dashboard"
+            onClick={() => navigate("/dash")} // Redirige a /dash
+          >
+            Ir al Dashboard de Prueba
+          </button>
         </div>
       </div>
 

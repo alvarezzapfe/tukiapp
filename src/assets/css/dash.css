@@ -1,0 +1,95 @@
+/* Página completa */
+.dash-page {
+  display: flex;
+  height: 100vh; /* Ocupa toda la pantalla */
+}
+
+/* Barra Lateral */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%; /* Ocupar toda la altura */
+  width: 70px; /* Anchura inicial */
+  background: linear-gradient(145deg, #dff3f5, #bfe4e7); /* Tonos 3D */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border-radius: 0 15px 15px 0; /* Bordes redondeados a la derecha */
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar:hover {
+  width: 250px; /* Anchura al expandirse */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de los ítems en la barra lateral */
+.sidebar-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-item i {
+  font-size: 20px;
+}
+
+.sidebar-item .text {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.sidebar:hover .sidebar-item .text {
+  opacity: 1;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Efecto hover */
+  color: #000;
+}
+
+/* Ítem para "Salir" */
+.sidebar-item.logout {
+  margin-top: auto;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.sidebar-item.logout:hover {
+  background: rgba(255, 77, 79, 0.1);
+  color: #cc0000;
+}
+
+/* Contenido Principal */
+.content {
+  margin-left: 70px;
+  padding: 20px;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover ~ .content {
+  margin-left: 250px; /* Ajustar al expandirse */
+}
+
+/* Fondo del contenido principal */
+.content h1 {
+  font-size: 24px;
+  color: #003366;
+}
+
+.content p {
+  color: #555;
+  font-size: 16px;
+}

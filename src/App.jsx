@@ -13,6 +13,7 @@ import Login from "./login";
 import Simulador from "./simulador";
 import Navbar from "./components/Navbar"; // Componente Navbar
 import logo from "./assets/images/logo1.png";
+import Dash from "./dash";
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
@@ -352,6 +353,7 @@ const App = () => {
         <Route path="/simulador" element={<Simulador />} />
         <Route path="/login" element={<Login />} />
         <Route path="/solicitud" element={<Solicitud />} />
+        <Route path="/dash" element={<Dash />} />
       </Routes>
     </Router>
   );
