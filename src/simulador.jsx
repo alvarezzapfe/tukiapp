@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import Navbar from "./components/Navbar"; // Reutilizando el Navbar
 import "./assets/css/simulador.css";
 import logo from "./assets/images/logo1.png";
-import Navbar from "./components/Navbar";
 
 const Simulador = () => {
   const [monto, setMonto] = useState("");
@@ -36,29 +35,7 @@ const Simulador = () => {
   return (
     <div className="simulador-page">
       {/* Navbar */}
-      <nav className="navbar">
-        <div className="navbar-container">
-          <a href="#" className="navbar-logo">
-            <img src={logo} alt="Logotipo" className="logo-small" />
-          </a>
-          <div className="navbar-menu">
-            <ul className="navbar-menu">
-              <li>
-                <Link to="/">Inicio</Link>
-              </li>
-              <li>
-                <Link to="/simulador">Simulador</Link>
-              </li>
-              <li>
-                <Link to="/login" className="btn btn-outline-light ms-3">
-                  Login
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
+      <Navbar /> {/* Reutilizando el componente Navbar */}
       {/* Simulador Section */}
       <div className="simulador-section d-flex justify-content-center align-items-center">
         {!resultado ? (
@@ -128,7 +105,7 @@ const Simulador = () => {
           </div>
         )}
       </div>
-
+      {/* Footer */}
       {/* Footer */}
       <footer className="footer-section text-dark">
         <div className="container">

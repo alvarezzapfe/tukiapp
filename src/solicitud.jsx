@@ -226,6 +226,7 @@ const Solicitud = () => {
         </div>
       )}
       {/* Footer */}
+      {/* Footer */}
       <footer className="footer-section text-dark">
         <div className="container">
           {/* Logotipo */}
@@ -233,6 +234,11 @@ const Solicitud = () => {
             <div className="col-md-4 text-center">
               <img src={logo} alt="Logotipo" className="logo-small" />
             </div>
+          </div>
+
+          {/* Línea Separadora */}
+          <div className="footer-bottom text-center mt-4">
+            <hr className="footer-line" />
           </div>
 
           {/* Leyenda y Créditos */}
@@ -250,7 +256,6 @@ const Solicitud = () => {
             </div>
           </div>
 
-          {/* Créditos Finales */}
           {/* Créditos Finales */}
           <div className="row mt-4">
             <div className="col text-center">

@@ -2,6 +2,8 @@
 .dash-page {
   display: flex;
   height: 100vh; /* Ocupa toda la pantalla */
+  background-color: #f4f4f9;
+  overflow: hidden; /* Evitar scroll innecesario */
 }
 
 /* Barra Lateral */
@@ -9,25 +11,24 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%; /* Ocupar toda la altura */
-  width: 70px; /* Anchura inicial */
-  background: linear-gradient(145deg, #dff3f5, #bfe4e7); /* Tonos 3D */
+  height: 100%;
+  width: 70px;
+  background: linear-gradient(145deg, #dff3f5, #bfe4e7);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  border-radius: 0 15px 15px 0; /* Bordes redondeados a la derecha */
+  border-radius: 0 15px 15px 0;
   transition: width 0.3s ease, box-shadow 0.3s ease;
   z-index: 1000;
 }
 
 .sidebar:hover {
-  width: 250px; /* Anchura al expandirse */
+  width: 250px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo de los ítems en la barra lateral */
 .sidebar-item {
   width: 100%;
   display: flex;
@@ -54,12 +55,6 @@
   opacity: 1;
 }
 
-.sidebar-item:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Efecto hover */
-  color: #000;
-}
-
-/* Ítem para "Salir" */
 .sidebar-item.logout {
   margin-top: auto;
   font-weight: bold;
@@ -73,23 +68,132 @@
 
 /* Contenido Principal */
 .content {
-  margin-left: 70px;
+  margin-left: 70px; /* Mantén espacio cuando la barra está cerrada */
   padding: 20px;
   flex-grow: 1;
-  transition: margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Centrar gráficas hacia arriba */
+  align-items: center; /* Centrar horizontalmente */
 }
 
 .sidebar:hover ~ .content {
-  margin-left: 250px; /* Ajustar al expandirse */
+  margin-left: 70px; /* El contenido no se mueve cuando la barra se expande */
 }
 
-/* Fondo del contenido principal */
-.content h1 {
-  font-size: 24px;
+.content-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.content-header h1 {
+  font-size: 1.8rem; /* Tamaño ajustado */
   color: #003366;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.content p {
-  color: #555;
-  font-size: 16px;
+.content-header h1:hover {
+  color: #1e88a7; /* Resalta el texto al pasar el cursor */
+}
+
+/* Grid para las gráficas */
+.graphs-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas para tres gráficas */
+  grid-gap: 20px; /* Espaciado entre gráficas */
+  padding: 20px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-items: center;
+}
+
+/* Ajuste de las gráficas */
+.graph-box {
+  background: linear-gradient(145deg, #001f33, #003f66); /* Azul marino */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  width: 300px; /* Tamaño ajustado */
+  height: 300px; /* Altura proporcional */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-box:hover {
+  transform: translateY(-5px); /* Eleva ligeramente al pasar el cursor */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Títulos de las gráficas */
+.graph-box h3 {
+  color: #fff;
+  margin-bottom: 10px;
+  font-size: 1rem; /* Tamaño ajustado */
+  text-align: center;
+}
+
+/* Canvas para las gráficas */
+.graph-box canvas {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 90%; /* Altura proporcional */
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .graphs-container {
+    grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+  }
+  .graph-box {
+    width: 250px; /* Tamaño reducido en móvil */
+    height: 250px;
+  }
+  .graph-box canvas {
+    height: 80%; /* Canvas más pequeño */
+  }
+}
+
+/* Tabla de Créditos */
+.creditos-table {
+  width: 60%; /* Tamaño reducido */
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: auto; /* Centramos hacia la derecha */
+  margin-right: auto; /* Evita superposición con sidebar */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.creditos-table th {
+  background-color: #003366; /* Azul marino */
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.creditos-table td {
+  padding: 10px 15px;
+  font-size: 0.85rem;
+  color: #333; /* Gris oscuro */
+  border-bottom: 1px solid #ddd;
+}
+
+.creditos-table tr:hover {
+  background-color: #f4f4f9;
+}
+
+.creditos-table th:hover {
+  background-color: #1e88a7; /* Resaltado en hover */
+}
+
+/* Mejoras responsivas */
+@media (max-width: 768px) {
+  .creditos-table {
+    width: 100%; /* Ocupa el ancho completo */
+  }
+  .graphs-container {
+    grid-template-columns: 1fr; /* Gráficas en una sola columna */
+  }
 }
