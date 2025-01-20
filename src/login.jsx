@@ -15,13 +15,13 @@ const Login = () => {
       {/* Login Section */}
       <div className="login-section">
         <div className="login-form">
-          <h2>Portal en Desarrollo</h2>
-          <p>Lanzamiento Junio 2025</p>
+          <h2>Portal de Administrador</h2>
+          <p>Únicamente para Uso interno</p>
           <button
             className="go-to-dashboard"
             onClick={() => navigate("/dash")} // Redirige a /dash
           >
-            Ir al Dashboard de Prueba
+            Ingreso
           </button>
         </div>
       </div>

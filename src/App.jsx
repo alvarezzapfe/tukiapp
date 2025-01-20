@@ -200,12 +200,12 @@ const Home = () => {
             {/* Contacto */}
             <div className="col-md-3">
               <h5>Contacto</h5>
-              <p>Tel: +52 123 456 7890</p>
-              <p>Email: contacto@mxccapital.com.mx</p>
+              <p>Tel: +52 55 5551609091</p>
+              <p>Email: contacto@[AQUI VA NOMBRE NUEVO].com.mx</p>
               <p>Dirección:</p>
               <p>
-                Torre Esmeralda III, Ferrocarril de Cuernavaca, Ciudad de
-                México.
+                Tiburcio Montiel 89, Colonia San Miguel Chapultepec, Miguel
+                Hidalgo, C.P. 11850, Ciudad de México, México.
               </p>
               <i className="fas fa-globe"></i>
             </div>

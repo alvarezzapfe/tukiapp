@@ -155,13 +155,11 @@
   }
 }
 
-/* Tabla de Créditos */
+/* tabla de solicitudes    */
 .creditos-table {
-  width: 60%; /* Tamaño reducido */
+  width: 80%;
   border-collapse: collapse;
-  margin-top: 20px;
-  margin-left: auto; /* Centramos hacia la derecha */
-  margin-right: auto; /* Evita superposición con sidebar */
+  margin: 20px auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -176,7 +174,7 @@
 .creditos-table td {
   padding: 10px 15px;
   font-size: 0.85rem;
-  color: #333; /* Gris oscuro */
+  color: #333;
   border-bottom: 1px solid #ddd;
 }
 
@@ -185,15 +183,5 @@
 }
 
 .creditos-table th:hover {
-  background-color: #1e88a7; /* Resaltado en hover */
-}
-
-/* Mejoras responsivas */
-@media (max-width: 768px) {
-  .creditos-table {
-    width: 100%; /* Ocupa el ancho completo */
-  }
-  .graphs-container {
-    grid-template-columns: 1fr; /* Gráficas en una sola columna */
-  }
+  background-color: #1e88a7;
 }

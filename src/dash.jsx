@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./assets/css/dash.css";
 
 import {
@@ -30,7 +31,9 @@ ChartJS.register(
 
 const Dash = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
+  const [solicitudes, setSolicitudes] = useState([]);
 
+  // Datos para gráficas
   const lineData = {
     labels: [
       "Enero",
@@ -80,26 +83,23 @@ const Dash = () => {
     ],
   };
 
-  const creditos = [
-    {
-      monto: "$500,000",
-      tasa: "10%",
-      intereses: "$50,000",
-      fechaPagoIntereses: "2025-02-01",
-      fechaInicio: "2024-01-01",
-      fechaFin: "2026-01-01",
-      bullet: "No",
-    },
-    {
-      monto: "$1,000,000",
-      tasa: "12%",
-      intereses: "$120,000",
-      fechaPagoIntereses: "2025-03-01",
-      fechaInicio: "2024-06-01",
-      fechaFin: "2027-06-01",
-      bullet: "Sí",
-    },
-  ];
+  // Cargar solicitudes desde el backend
+  useEffect(() => {
+    const fetchSolicitudes = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5001/api/solicitudes"
+        );
+        setSolicitudes(response.data);
+      } catch (error) {
+        console.error("Error al obtener solicitudes:", error);
+      }
+    };
+
+    if (activeSection === "solicitudes") {
+      fetchSolicitudes();
+    }
+  }, [activeSection]);
 
   return (
     <div className="dash-page">
@@ -116,10 +116,10 @@ const Dash = () => {
         <a
           href="#"
           className="sidebar-item"
-          onClick={() => setActiveSection("creditos")}
+          onClick={() => setActiveSection("solicitudes")}
         >
           <i className="fas fa-money-check-alt"></i>
-          <span className="text">Créditos</span>
+          <span className="text">Solicitudes</span>
         </a>
         <Link to="/" className="sidebar-item logout">
           <i className="fas fa-sign-out-alt"></i>
@@ -150,31 +150,35 @@ const Dash = () => {
           </>
         )}
 
-        {activeSection === "creditos" && (
+        {activeSection === "solicitudes" && (
           <>
-            <h1>Créditos Otorgados</h1>
+            <h1>Solicitudes Recibidas</h1>
             <table className="creditos-table">
               <thead>
                 <tr>
-                  <th>Monto</th>
-                  <th>Tasa</th>
-                  <th>Intereses</th>
-                  <th>Fecha de Pago de Intereses</th>
-                  <th>Fecha Inicio</th>
-                  <th>Fecha Fin</th>
-                  <th>Bullet</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>RFC</th>
+                  <th>Facturación</th>
+                  <th>Razón Social</th>
+                  <th>Tipo de Sociedad</th>
+                  <th>Monto Crédito</th>
+                  <th>Plazo</th>
+                  <th>Fecha</th>
                 </tr>
               </thead>
               <tbody>
-                {creditos.map((credito, index) => (
+                {solicitudes.map((solicitud, index) => (
                   <tr key={index}>
-                    <td>{credito.monto}</td>
-                    <td>{credito.tasa}</td>
-                    <td>{credito.intereses}</td>
-                    <td>{credito.fechaPagoIntereses}</td>
-                    <td>{credito.fechaInicio}</td>
-                    <td>{credito.fechaFin}</td>
-                    <td>{credito.bullet}</td>
+                    <td>{solicitud.nombre}</td>
+                    <td>{solicitud.apellido}</td>
+                    <td>{solicitud.rfc}</td>
+                    <td>{solicitud.facturacion}</td>
+                    <td>{solicitud.razonSocial}</td>
+                    <td>{solicitud.tipoSociedad}</td>
+                    <td>{solicitud.montoCredito}</td>
+                    <td>{solicitud.plazo}</td>
+                    <td>{new Date(solicitud.fecha).toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
