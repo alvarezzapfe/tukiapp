@@ -14,6 +14,8 @@ import Simulador from "./simulador";
 import Navbar from "./components/Navbar"; // Componente Navbar
 import logo from "./assets/images/logo1.png";
 import Dash from "./dash";
+import "@fontsource/poppins"; // Estilo normal
+import "@fontsource/poppins/600.css"; // Estilo bold
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
@@ -205,7 +207,7 @@ const Home = () => {
                 Torre Esmeralda III, Ferrocarril de Cuernavaca, Ciudad de
                 México.
               </p>
-              <i class="fas fa-globe"></i>
+              <i className="fas fa-globe"></i>
             </div>
 
             {/* Enlaces */}
