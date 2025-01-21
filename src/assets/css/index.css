@@ -248,13 +248,14 @@ button:hover {
 
 /* Sección Nuestro Modelo */
 /* Modelo Section */
+/* Sección Modelo de Negocio */
 .modelo-section {
   background-color: #ffffff; /* Fondo blanco */
-  padding: 300px 0; /* Área 200% más grande */
+  padding: 100px 0; /* Expandir área */
 }
 
 .modelo-section h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
   color: #11698e; /* Verde azulado profundo */
 }
@@ -262,6 +263,13 @@ button:hover {
 .modelo-section p {
   font-size: 1.2rem;
   color: #4e6a82; /* Azul oscuro suave */
+}
+
+/* Subtítulo */
+.subtitulo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #11698e; /* Mismo color que el título principal */
 }
 
 /* Estilo de las tarjetas */
@@ -275,20 +283,20 @@ button:hover {
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   padding: 20px;
-  height: 250px; /* Tamaño inicial */
+  height: 280px; /* Ajustar tamaño */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .modelo-card:hover {
-  transform: scale(1.025); /* Incrementa el tamaño al pasar el cursor */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Aumenta la sombra */
+  transform: scale(1.025);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
 .modelo-card .icono {
-  font-size: 3rem; /* Tamaño del ícono */
+  font-size: 3rem;
   color: #16c79a; /* Verde menta brillante */
 }
 
@@ -298,14 +306,83 @@ button:hover {
   color: #003b80; /* Azul profundo */
 }
 
-.modelo-card p {
+.modelo-card ul {
+  list-style: disc;
+  padding-left: 20px;
+  color: #1e2a38;
   font-size: 1rem;
-  color: #1e2a38; /* Azul grisáceo */
+}
+
+/* Estilo de las tarjetas de empresas */
+.empresa-card {
+  background: linear-gradient(
+    145deg,
+    #1a2a3a,
+    #0e3b2f
+  ); /* Azul marino y verde gradiente */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  color: white;
+}
+
+.empresa-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #16c79a;
+}
+
+.empresa-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #16c79a;
+  position: relative;
+}
+
+.blinking-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #16c79a;
+  border-radius: 50%;
+  margin-left: 10px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.empresa-content {
+  font-size: 1rem;
+  color: #b0c7d1;
+  list-style: disc;
+  padding-left: 20px;
+}
+
+/* Zoom out para imagen específica */
+.zoom-out {
+  transform: scale(0.9); /* Reducir tamaño inicial */
+  transition: transform 0.3s ease;
+}
+
+.zoom-out:hover {
+  transform: scale(1); /* Volver al tamaño original al pasar el cursor */
 }
 
 /* Ajustes Responsivos */
 @media (max-width: 768px) {
-  .modelo-card {
+  .modelo-card,
+  .empresa-card {
     height: auto; /* Ajusta la altura en pantallas pequeñas */
   }
 }

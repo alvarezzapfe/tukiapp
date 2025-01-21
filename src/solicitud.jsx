@@ -23,6 +23,9 @@ const Solicitud = () => {
     plazo: "",
     institucion: "",
     urgencia: "",
+    crearCuenta: false, // Nuevo estado para checkbox
+    contraseña: "", // Campo para la contraseña
+    confirmarContraseña: "", // Campo para confirmar la contraseña
   });
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -63,9 +66,16 @@ const Solicitud = () => {
   ];
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
 
-    if (name === "celular") {
+    if (type === "checkbox") {
+      // Manejar checkboxes con "checked"
+      setFormData({ ...formData, [name]: checked });
+    } else if (name === "contraseña" || name === "confirmarContraseña") {
+      // Limitar la longitud de la contraseña a 20 caracteres
+      if (value.length > 20) return;
+      setFormData({ ...formData, [name]: value });
+    } else if (name === "celular") {
       // Validar que solo permita números y máximo 10 dígitos
       if (!/^\d*$/.test(value) || value.length > 10) return;
       setFormData({ ...formData, [name]: value });
@@ -102,13 +112,7 @@ const Solicitud = () => {
     ) {
       setFormData({ ...formData, [name]: value });
     } else if (name === "correo") {
-      // Validar formato de correo electrónico
-      if (value.length > 100) return;
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (value && !emailRegex.test(value)) {
-        alert("Por favor, introduce un correo electrónico válido.");
-        return;
-      }
+      // Permitir que el usuario escriba parcialmente un correo electrónico
       setFormData({ ...formData, [name]: value });
     } else if (name === "rfc") {
       // Validar RFC (13 caracteres alfanuméricos)
@@ -133,27 +137,71 @@ const Solicitud = () => {
 
   const handleNextStep = (e) => {
     e.preventDefault();
-    setStep(step + 1);
+
+    // Si estamos en el paso 3 y no desea crear cuenta, enviar directamente
+    if (step === 3 && !formData.crearCuenta) {
+      handleSubmit(e);
+    } else if (step === 3 && formData.crearCuenta) {
+      setStep(4); // Avanzar al paso 4 si crearCuenta está seleccionado
+    } else {
+      setStep(step + 1);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    // Validaciones finales
-    if (formData.rfc.length !== 13) {
-      alert("El RFC debe tener exactamente 13 caracteres.");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.correo)) {
+      alert("Por favor, introduce un correo electrónico válido.");
       setLoading(false);
       return;
     }
 
+    // Validar contraseña solo si crearCuenta es true
+    if (formData.crearCuenta) {
+      const passwordRegex =
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,20}$/;
+      if (!passwordRegex.test(formData.contraseña)) {
+        alert(
+          "La contraseña debe tener entre 10 y 20 caracteres, incluir un número y un carácter especial."
+        );
+        setLoading(false);
+        return;
+      }
+
+      if (formData.contraseña !== formData.confirmarContraseña) {
+        alert("Las contraseñas no coinciden.");
+        setLoading(false);
+        return;
+      }
+
+      // Crear cuenta en el backend
+      try {
+        const usuarioResponse = await axios.post(
+          "http://localhost:5001/api/usuarios",
+          {
+            correo: formData.correo,
+            contraseña: formData.contraseña,
+          }
+        );
+        console.log("Cuenta creada:", usuarioResponse.data.message);
+      } catch (error) {
+        console.error("Error al crear la cuenta:", error);
+        setLoading(false);
+        return;
+      }
+    }
+
+    // Enviar solicitud al backend
+    setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:5001/api/solicitudes",
         {
           ...formData,
-          montoCredito: parseFloat(formData.montoCredito.replace(/,/g, "")), // Eliminar comas antes de enviar
-          facturacion: parseFloat(formData.facturacion.replace(/,/g, "")), // Eliminar comas antes de enviar
+          montoCredito: parseFloat(formData.montoCredito.replace(/,/g, "")),
+          facturacion: parseFloat(formData.facturacion.replace(/,/g, "")),
         }
       );
       console.log(response.data.message);
@@ -267,6 +315,7 @@ const Solicitud = () => {
             </div>
           </>
         );
+
       case 2:
         return (
           <>
@@ -429,8 +478,73 @@ const Solicitud = () => {
                 </select>
               </div>
             </div>
+            <div className="form-row">
+              <div className="form-column">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="crearCuenta"
+                    checked={formData.crearCuenta}
+                    onChange={handleInputChange}
+                  />{" "}
+                  ¿Deseas crear una cuenta de usuario? <br />
+                  <small className="password-hint">
+                    La contraseña debe contener al menos 10 caracteres, un
+                    número y un carácter especial.
+                  </small>
+                </label>
+              </div>
+            </div>
           </>
         );
+
+      case 4:
+        return (
+          <>
+            <div className="form-row">
+              <h3 className="form-title">Crear tu Cuenta</h3>
+              <p className="form-description">
+                Antes de enviar tu solicitud, ingresa una contraseña para crear
+                tu cuenta.
+              </p>
+            </div>
+            <div className="form-row">
+              <div className="form-column">
+                <label>Contraseña</label>
+                <input
+                  type="password"
+                  name="contraseña"
+                  className="form-control"
+                  value={formData.contraseña}
+                  onChange={handleInputChange}
+                  maxLength="20"
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-column">
+                <label>Confirmar Contraseña</label>
+                <input
+                  type="password"
+                  name="confirmarContraseña"
+                  className="form-control"
+                  value={formData.confirmarContraseña}
+                  onChange={handleInputChange}
+                  maxLength="20"
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-row">
+              <p className="text">
+                La contraseña debe contener al menos 10 caracteres, un número y
+                un carácter especial.
+              </p>
+            </div>
+          </>
+        );
+
       default:
         return null;
     }
@@ -442,10 +556,10 @@ const Solicitud = () => {
       <div className="solicitud-section">
         <div className="solicitud-card">
           <h2>Solicitud de Crédito</h2>
-          <form onSubmit={step === 3 ? handleSubmit : handleNextStep}>
+          <form onSubmit={step === 4 ? handleSubmit : handleNextStep}>
             {renderStep()}
             <button type="submit" className="btn-submit">
-              {step === 3 ? "Enviar Solicitud" : "Siguiente"}
+              {step === 4 ? "Enviar Solicitud" : "Siguiente"}
             </button>
           </form>
         </div>
@@ -459,16 +573,22 @@ const Solicitud = () => {
         </div>
       )}
 
+      {/* Footer */}
       <footer className="footer-section text-dark">
         <div className="container">
+          {/* Logotipo */}
           <div className="row justify-content-center mb-4">
             <div className="col-md-4 text-center">
               <img src={logo} alt="Logotipo" className="logo-small" />
             </div>
           </div>
+
+          {/* Línea Separadora */}
           <div className="footer-bottom text-center mt-4">
             <hr className="footer-line" />
           </div>
+
+          {/* Leyenda y Créditos */}
           <div className="row mt-4">
             <div className="col text-center">
               <p className="small">
@@ -476,7 +596,36 @@ const Solicitud = () => {
                 Inversión de Capital Variable, ("Tuki"), para su constitución y
                 operación con tal carácter, no requiere de autorización de la
                 Secretaría de Hacienda y Crédito Público. Tuki ©. Todos los
-                derechos reservados.
+                derechos reservados. Prohibida la reproducción total o parcial
+                del contenido de este sitio. * Todo el análisis es generado con
+                herramientas y desarrollo interno.
+              </p>
+            </div>
+          </div>
+
+          {/* Créditos Finales */}
+          <div className="row mt-4">
+            <div className="col text-center">
+              <p className="footer-credits small">
+                Desarrollado por{" "}
+                <a
+                  href="https://www.linkedin.com/in/luis-armando-alvarez-zapfe-201217137/?originalSubdomain=mx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link"
+                >
+                  Luis Armando Alvarez Zapfe
+                </a>{" "}
+                con{" "}
+                <a
+                  href="https://reactjs.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-link"
+                >
+                  React.js
+                </a>{" "}
+                <i className="fab fa-react footer-icon"></i>
               </p>
             </div>
           </div>

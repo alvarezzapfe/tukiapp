@@ -155,38 +155,108 @@
   }
 }
 
-/* tabla de solicitudes    */
-/* Tabla de Solicitudes */
-.creditos-table {
+/* tabla de solicitudes y usuarios comentario LAAZ   */
+/* Tablas de Solicitudes y Usuarios */
+.creditos-table,
+.usuarios-table {
   width: 90%; /* Ancho mayor para más espacio */
   border-collapse: collapse;
   margin: 20px auto;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: #001f33; /* Azul marino profundo */
+  border-radius: 10px;
+  overflow: hidden; /* Ocultar bordes fuera del radio */
+  box-shadow: 0 0 20px rgba(22, 199, 154, 0.8); /* Sombra verde fosforescente */
+}
+
+.creditos-table th,
+.usuarios-table th {
+  padding: 12px 15px;
+  background: #002b4f; /* Azul marino más oscuro */
+  color: #fff;
+  font-size: 0.9rem;
+  text-transform: uppercase;
   text-align: center;
-  font-size: 0.8rem; /* Tamaño reducido */
-}
-.creditos-table th:nth-child(8),
-.creditos-table td:nth-child(8) {
-  width: 180px; /* Espacio suficiente para mostrar montos grandes */
-  text-align: right; /* Alineación a la derecha para montos */
+  font-weight: bold;
+  border-bottom: 2px solid #16c79a; /* Verde brillante */
 }
 
-.creditos-table td {
-  padding: 8px 10px;
-  font-size: 0.85rem; /* Incrementa ligeramente el tamaño del texto */
-  color: #333;
-  border-bottom: 1px solid #ddd;
+.creditos-table td,
+.usuarios-table td {
+  padding: 10px 15px;
+  color: #e0e0e0; /* Texto gris claro */
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea sutil */
   text-align: center;
 }
 
-.creditos-table {
-  table-layout: auto; /* Permite ajustar automáticamente el ancho de las columnas según el contenido */
+/* Efectos de Hover */
+.creditos-table tr:hover,
+.usuarios-table tr:hover {
+  background: linear-gradient(
+    145deg,
+    #003f66,
+    #002b4f
+  ); /* Efecto degradado al pasar el cursor */
+  transform: scale(1.01); /* Ligeramente más grande */
+  transition: all 0.3s ease;
 }
 
-.creditos-table tr:hover {
-  background-color: #f4f4f9;
+.creditos-table th:hover,
+.usuarios-table th:hover {
+  background-color: #16c79a; /* Fondo verde brillante */
+  color: #001f33; /* Texto azul marino */
 }
 
-.creditos-table th:hover {
-  background-color: #1e88a7;
+/* Botón de Filtro */
+.filter-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 20px;
+  background: linear-gradient(145deg, #16c79a, #13a67f);
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  transform: translateY(-3px); /* Sube un poco */
+  background: #13a67f; /* Verde más oscuro */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Sombra más profunda */
+}
+
+/* ESTILO de paginacion */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background: linear-gradient(145deg, #16c79a, #13a67f);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pagination button.active {
+  background: #1e88a7;
+  color: #fff;
+}
+
+.pagination button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

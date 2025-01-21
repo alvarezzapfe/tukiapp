@@ -65,6 +65,13 @@
   color: #16c79a; /* Color distintivo */
 }
 
+/*   password hint   */
+
+.password-hint {
+  color: #16c79a;
+  font-size: 0.875rem; /* Tamaño de texto más pequeño */
+}
+
 /* Botón */
 .btn-submit {
   background: linear-gradient(145deg, #1e90ff, #00bfff);

@@ -1,0 +1,220 @@
+/* Página de Usuarios */
+.usuarios-page {
+  display: flex;
+  height: 100vh; /* Ocupa toda la pantalla */
+  background-color: #001f33; /* Azul marino de fondo */
+  overflow: hidden; /* Evitar scroll innecesario */
+}
+
+/* Barra Lateral */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 70px;
+  background: linear-gradient(145deg, #dff3f5, #bfe4e7);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border-radius: 0 15px 15px 0;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar:hover {
+  width: 250px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-item i {
+  font-size: 20px;
+}
+
+.sidebar-item .text {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.sidebar:hover .sidebar-item .text {
+  opacity: 1;
+}
+
+.sidebar-item.logout {
+  margin-top: auto;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.sidebar-item.logout:hover {
+  background: rgba(255, 77, 79, 0.1);
+  color: #cc0000;
+}
+
+/* Contenido Principal */
+.content {
+  margin-left: 70px; /* Mantén espacio cuando la barra está cerrada */
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Centrar gráficas hacia arriba */
+  align-items: center; /* Centrar horizontalmente */
+}
+
+.sidebar:hover ~ .content {
+  margin-left: 70px; /* El contenido no se mueve cuando la barra se expande */
+}
+
+.content-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.content-header h1 {
+  font-size: 2rem; /* Tamaño ajustado */
+  color: #ffffff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.content-header h1:hover {
+  color: #1e88a7; /* Resalta el texto al pasar el cursor */
+}
+
+/* Sección de Perfil */
+.perfil-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+  width: 90%;
+}
+
+.perfil-box {
+  background: linear-gradient(
+    145deg,
+    #003366,
+    #004f80
+  ); /* Azul 3D más intenso */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  color: #fff; /* Texto blanco */
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.perfil-box:hover {
+  transform: translateY(-5px); /* Sube un poco al pasar el cursor */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Tabla de Solicitudes */
+.solicitudes-table {
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  background: #001f33;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(22, 199, 154, 0.8);
+}
+
+.solicitudes-table th {
+  padding: 12px 15px;
+  background: #002b4f;
+  color: #fff;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid #16c79a;
+}
+
+.solicitudes-table td {
+  padding: 10px 15px;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+/* Colores de Estatus */
+.status-revision {
+  color: #ffcc00; /* Amarillo */
+  font-weight: bold;
+}
+
+.status-aprobada {
+  color: #16c79a; /* Verde fosforescente */
+  font-weight: bold;
+}
+
+.status-rechazada {
+  color: #ff704d; /* Naranja */
+  font-weight: bold;
+}
+
+/* Efectos de Hover */
+.solicitudes-table tr:hover {
+  background: linear-gradient(145deg, #003f66, #002b4f);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
+.solicitudes-table th:hover {
+  background-color: #16c79a;
+  color: #001f33;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background: linear-gradient(145deg, #16c79a, #13a67f);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pagination button.active {
+  background: #1e88a7;
+  color: #fff;
+}
+
+.pagination button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

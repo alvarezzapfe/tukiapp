@@ -28,6 +28,17 @@ ChartJS.register(
 const Dash = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
   const [solicitudes, setSolicitudes] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+
+  // Estados para la paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Cantidad de elementos por página
+
+  // Obtener datos paginados
+  const paginatedData = (data) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return data.slice(startIndex, startIndex + itemsPerPage);
+  };
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
@@ -41,10 +52,21 @@ const Dash = () => {
       }
     };
 
-    if (activeSection === "solicitudes") {
-      fetchSolicitudes();
-    }
+    const fetchUsuarios = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/api/usuarios");
+        setUsuarios(response.data);
+      } catch (error) {
+        console.error("Error al obtener usuarios:", error);
+      }
+    };
+
+    if (activeSection === "solicitudes") fetchSolicitudes();
+    if (activeSection === "usuarios") fetchUsuarios();
   }, [activeSection]);
+
+  const totalPagesSolicitudes = Math.ceil(solicitudes.length / itemsPerPage);
+  const totalPagesUsuarios = Math.ceil(usuarios.length / itemsPerPage);
 
   return (
     <div className="dash-page">
@@ -65,6 +87,14 @@ const Dash = () => {
         >
           <i className="fas fa-money-check-alt"></i>
           <span className="text">Solicitudes</span>
+        </a>
+        <a
+          href="#"
+          className="sidebar-item"
+          onClick={() => setActiveSection("usuarios")}
+        >
+          <i className="fas fa-users"></i>
+          <span className="text">Usuarios</span>
         </a>
         <Link to="/" className="sidebar-item logout">
           <i className="fas fa-sign-out-alt"></i>
@@ -118,7 +148,7 @@ const Dash = () => {
                 </tr>
               </thead>
               <tbody>
-                {solicitudes.map((solicitud, index) => (
+                {paginatedData(solicitudes).map((solicitud, index) => (
                   <tr key={index}>
                     <td>{solicitud.primerNombre}</td>
                     <td>{solicitud.apellidoPaterno}</td>
@@ -131,16 +161,60 @@ const Dash = () => {
                       {new Intl.NumberFormat("es-MX", {
                         style: "currency",
                         currency: "MXN",
-                        minimumFractionDigits: 2,
                       }).format(parseFloat(solicitud.montoCredito))}
                     </td>
-
                     <td>{solicitud.plazo} meses</td>
                     <td>{new Date(solicitud.fecha).toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <div className="pagination">
+              {Array.from({ length: totalPagesSolicitudes }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={currentPage === i + 1 ? "active" : ""}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+
+        {activeSection === "usuarios" && (
+          <>
+            <h1>Usuarios Registrados</h1>
+            <table className="usuarios-table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Fecha de Registro</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedData(usuarios).map((usuario, index) => (
+                  <tr key={index}>
+                    <td>{usuario.nombre}</td>
+                    <td>{usuario.correo}</td>
+                    <td>{new Date(usuario.fechaRegistro).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="pagination">
+              {Array.from({ length: totalPagesUsuarios }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={currentPage === i + 1 ? "active" : ""}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
           </>
         )}
       </div>

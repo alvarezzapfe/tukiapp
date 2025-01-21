@@ -13,7 +13,10 @@ import Login from "./login";
 import Simulador from "./simulador";
 import Navbar from "./components/Navbar"; // Componente Navbar
 import logo from "./assets/images/logo1.png";
+import crowdlinkImg from "./assets/images/crowdlink.png";
+import pimxImg from "./assets/images/pimx.png";
 import Dash from "./dash";
+import Usuarios from "./usuarios";
 import "@fontsource/poppins"; // Estilo normal
 import "@fontsource/poppins/600.css"; // Estilo bold
 
@@ -58,9 +61,10 @@ const Home = () => {
         <div className="particle"></div>
         <div className="particle"></div>
         <div className="container py-5">
-          <h1 className="display-4">Bienvenido a TukiApp Tuktuk</h1>
+          <h1 className="display-4">Bienvenido a Weik</h1>
           <p className="lead">
-            Acceso fácil a crédito justo para la Pequeña Empresa en México.
+            Acceso fácil a crédito justo para la Pequeña & Mediana Empresa en
+            México.
           </p>
           <button className="btn btn-light btn-lg mt-3">Conócenos</button>
         </div>
@@ -104,7 +108,7 @@ const Home = () => {
               {
                 title: "Fondeo",
                 icon: "fas fa-wallet",
-                details: "Conseguimos el crédito en menos de 4 semanas.",
+                details: "La Empresa Promovida Obtiene los recursos.",
               },
               {
                 title: "Escala",
@@ -140,34 +144,37 @@ const Home = () => {
         </div>
       </section>
 
-      {/*     */}
+      {/*  Modelo de Negocio Sección   */}
       <section id="modelo" className="py-5 text-center modelo-section">
         <div className="container">
+          {/* Título y descripción */}
           <h1 className="mb-4">Nuestro Modelo</h1>
           <p className="lead mb-5">
             Analizamos 4 variables para otorgar crédito inmediato a la pequeña
             empresa.
           </p>
+
+          {/* Cuatro cajas principales */}
           <div className="row">
             {[
               {
                 title: "Situación de Empresa",
-                details: "Alta RFC y situación fiscal",
+                details: ["Alta RFC", "Situación fiscal"],
                 icon: "fas fa-building",
               },
               {
                 title: "Buró de Crédito",
-                details: "Consulta y análisis detallado",
+                details: ["Consulta detallada", "Análisis completo"],
                 icon: "fas fa-credit-card",
               },
               {
                 title: "Modelo Financiero",
-                details: "A través de nuestro algoritmo de scoring",
+                details: ["Algoritmo de scoring", "Proyecciones avanzadas"],
                 icon: "fas fa-chart-line",
               },
               {
                 title: "Capacidad de Pago",
-                details: "EBITDA / Intereses Anuales",
+                details: ["EBITDA", "Intereses Anuales"],
                 icon: "fas fa-wallet",
               },
             ].map((item, index) => (
@@ -176,7 +183,60 @@ const Home = () => {
                   <div className="card-body text-center">
                     <i className={`${item.icon} icono`}></i>
                     <h5 className="card-title mt-3">{item.title}</h5>
-                    <p className="card-text">{item.details}</p>
+                    <ul className="card-text">
+                      {item.details.map((detail, idx) => (
+                        <li key={idx}>{detail}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Subtítulo */}
+          <h2 className="mt-5 mb-4 subtitulo">
+            Empresas con las que trabajamos:
+          </h2>
+
+          {/* Dos cajas adicionales */}
+          <div className="row">
+            {[
+              {
+                title: "Crowdlink",
+                content: [
+                  "Líder en Crowd Equity & Crowdlending para Pymes.",
+                  "Fintech Regulada por CNBV: PorCuanto S.A. de C.V., IFC.",
+                ],
+                imgSrc: crowdlinkImg, // Imagen local importada
+              },
+              {
+                title: "Pimx",
+                content: [
+                  "Fondo Privado de Deuda para la Mediana Empresa en México.",
+                  "Créditos con garantías Reales de $10MM hasta $250MM.",
+                ],
+                imgSrc: pimxImg, // Imagen local importada
+              },
+            ].map((item, index) => (
+              <div className="col-md-6 mb-4" key={index}>
+                <div className="card empresa-card">
+                  <div className="card-body text-center">
+                    <img
+                      src={item.imgSrc}
+                      alt={`Logotipo de ${item.title}`}
+                      className={`empresa-img mb-3 ${
+                        item.title === "Crowdlink" ? "zoom-out" : ""
+                      }`}
+                    />
+                    <h5 className="empresa-title">
+                      {item.title} <span className="blinking-dot"></span>
+                    </h5>
+                    <ul className="empresa-content">
+                      {item.content.map((point, idx) => (
+                        <li key={idx}>{point}</li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -215,18 +275,33 @@ const Home = () => {
               <h5>Enlaces</h5>
               <ul className="list-unstyled">
                 <li>
-                  <a href="#pimx" className="footer-link">
-                    Acerca de PiMX
+                  <a href="#inicio" className="footer-link">
+                    Inicio
                   </a>
                 </li>
                 <li>
-                  <a href="#equipo" className="footer-link">
-                    Equipo
+                  <a href="#acerca" className="footer-link">
+                    Acerca de
                   </a>
                 </li>
                 <li>
-                  <a href="#track" className="footer-link">
-                    Track Record
+                  <a href="#modelo" className="footer-link">
+                    Modelo
+                  </a>
+                </li>
+                <li>
+                  <a href="/simulador" className="footer-link">
+                    Simulador
+                  </a>
+                </li>
+                <li>
+                  <a href="/solicitud" className="footer-link">
+                    Solicitud
+                  </a>
+                </li>
+                <li>
+                  <a href="/login" className="footer-link">
+                    Login
                   </a>
                 </li>
               </ul>
@@ -264,16 +339,6 @@ const Home = () => {
                     className="footer-link"
                   >
                     Soporte Impulsa
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.vepormas.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-link"
-                  >
-                    VePorMás
                   </a>
                 </li>
               </ul>
@@ -356,6 +421,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/solicitud" element={<Solicitud />} />
         <Route path="/dash" element={<Dash />} />
+        <Route path="/usuarios" element={<Usuarios />} />
       </Routes>
     </Router>
   );

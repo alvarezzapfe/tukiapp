@@ -1,31 +1,97 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./assets/css/login.css";
-import logo from "./assets/images/logo1.png"; // Asegúrate de que la ruta sea correcta
+import logo from "./assets/images/logo1.png";
 import Navbar from "./components/Navbar";
 
 const Login = () => {
-  const navigate = useNavigate(); // Hook para navegación
+  const [activeTab, setActiveTab] = useState("clientes");
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5001/api/login",
+        formData
+      );
+      const { role } = response.data;
+
+      if (role === "admin") {
+        navigate("/dash");
+      } else if (role === "cliente") {
+        navigate("/usuarios");
+      }
+    } catch (error) {
+      setError("Credenciales inválidas. Por favor, intenta de nuevo.");
+      console.error("Error en el login:", error);
+    }
+  };
 
   return (
     <div className="login-page">
-      {/* Navbar */}
       <Navbar />
-
-      {/* Login Section */}
       <div className="login-section">
-        <div className="login-form">
-          <h2>Portal de Administrador</h2>
-          <p>Únicamente para Uso interno</p>
-          <button
-            className="go-to-dashboard"
-            onClick={() => navigate("/dash")} // Redirige a /dash
-          >
-            Ingreso
-          </button>
+        <div className="login-card">
+          <div className="tabs">
+            <div
+              className={`tab ${activeTab === "clientes" ? "active" : ""}`}
+              onClick={() => setActiveTab("clientes")}
+            >
+              Cliente
+            </div>
+            <div
+              className={`tab ${activeTab === "admin" ? "active" : ""}`}
+              onClick={() => setActiveTab("admin")}
+            >
+              Administrador
+            </div>
+          </div>
+          <div className="login-form">
+            <h2>
+              {activeTab === "clientes" ? "Acceso Clientes" : "Acceso Admin"}
+            </h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">Correo Electrónico</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="correo@ejemplo.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Contraseña</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Ingresa tu contraseña"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              {error && <p className="error-message">{error}</p>}
+              <button type="submit" className="btn-submit">
+                Ingresar
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-
       {/* Footer */}
       <footer className="footer-section text-dark">
         <div className="container">
