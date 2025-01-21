@@ -65,15 +65,70 @@ const Solicitud = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "celular" && (isNaN(value) || value.length > 10)) return;
-    if (name === "montoCredito") {
-      const formattedValue = value
-        .replace(/\D/g, "")
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (name === "celular") {
+      // Validar que solo permita números y máximo 10 dígitos
+      if (!/^\d*$/.test(value) || value.length > 10) return;
+      setFormData({ ...formData, [name]: value });
+    } else if (name === "montoCredito" || name === "facturacion") {
+      // Permitir solo números y formatear como moneda mexicana
+      const numericValue = value.replace(/[^0-9]/g, ""); // Eliminar caracteres no numéricos
+      if (parseInt(numericValue, 10) > 1000000000) return; // Límite de 1 mil millones
+      const formattedValue = new Intl.NumberFormat("es-MX").format(
+        numericValue
+      );
       setFormData({ ...formData, [name]: formattedValue });
-    } else {
+    } else if (
+      [
+        "primerNombre",
+        "segundoNombre",
+        "apellidoPaterno",
+        "apellidoMaterno",
+        "razonSocial",
+      ].includes(name)
+    ) {
+      // Validar que solo permita letras, espacios y limitar a 50 caracteres
+      if (!/^[a-zA-Z\s]*$/.test(value) || value.length > 50) return;
+      setFormData({ ...formData, [name]: value });
+    } // Manejar inputs tipo select
+    else if (
+      [
+        "tipoSociedad",
+        "industria",
+        "estado",
+        "plazo",
+        "institucion",
+        "urgencia",
+      ].includes(name)
+    ) {
+      setFormData({ ...formData, [name]: value });
+    } else if (name === "correo") {
+      // Validar formato de correo electrónico
+      if (value.length > 100) return;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (value && !emailRegex.test(value)) {
+        alert("Por favor, introduce un correo electrónico válido.");
+        return;
+      }
+      setFormData({ ...formData, [name]: value });
+    } else if (name === "rfc") {
+      // Validar RFC (13 caracteres alfanuméricos)
+      if (!/^[A-Za-z0-9]{0,13}$/.test(value)) {
+        alert(
+          "El RFC debe contener solo letras y números, y no más de 13 caracteres."
+        );
+        return;
+      }
       setFormData({ ...formData, [name]: value });
     }
+  };
+
+  const formatMonto = (value) => {
+    if (!value) return "";
+    return new Intl.NumberFormat("es-MX", {
+      style: "decimal",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
   };
 
   const handleNextStep = (e) => {
@@ -85,10 +140,21 @@ const Solicitud = () => {
     e.preventDefault();
     setLoading(true);
 
+    // Validaciones finales
+    if (formData.rfc.length !== 13) {
+      alert("El RFC debe tener exactamente 13 caracteres.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:5001/api/solicitudes",
-        formData
+        {
+          ...formData,
+          montoCredito: parseFloat(formData.montoCredito.replace(/,/g, "")), // Eliminar comas antes de enviar
+          facturacion: parseFloat(formData.facturacion.replace(/,/g, "")), // Eliminar comas antes de enviar
+        }
       );
       console.log(response.data.message);
       setShowPopup(true);

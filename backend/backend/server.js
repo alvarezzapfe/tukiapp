@@ -28,31 +28,57 @@ const solicitudes = [];
 // Ruta para guardar solicitudes
 app.post("/api/solicitudes", (req, res) => {
   const {
-    nombre,
-    apellido,
-    rfc,
+    primerNombre,
+    segundoNombre,
+    apellidoPaterno,
+    apellidoMaterno,
+    correo,
+    celular,
     facturacion,
+    rfc,
     razonSocial,
     tipoSociedad,
+    industria,
+    estado,
     montoCredito,
     plazo,
+    institucion,
+    urgencia,
   } = req.body;
 
   // Validación básica de campos obligatorios
   if (
-    !nombre ||
-    !apellido ||
-    !rfc ||
+    !primerNombre ||
+    !apellidoPaterno ||
+    !apellidoMaterno ||
+    !correo ||
+    !celular ||
     !facturacion ||
+    !rfc ||
     !razonSocial ||
     !tipoSociedad ||
+    !industria ||
+    !estado ||
     !montoCredito ||
-    !plazo
+    !plazo ||
+    !institucion ||
+    !urgencia
   ) {
     return res.status(400).json({ error: "Faltan datos obligatorios." });
   }
 
-  // Validación adicional (por ejemplo, formatos específicos)
+  // Validación adicional
+  const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!correoRegex.test(correo)) {
+    return res.status(400).json({ error: "Correo electrónico no válido." });
+  }
+
+  if (isNaN(celular) || celular.length !== 10) {
+    return res
+      .status(400)
+      .json({ error: "El celular debe contener exactamente 10 dígitos." });
+  }
+
   if (isNaN(parseFloat(facturacion)) || isNaN(parseFloat(montoCredito))) {
     return res
       .status(400)
@@ -61,14 +87,22 @@ app.post("/api/solicitudes", (req, res) => {
 
   // Crear nueva solicitud
   const nuevaSolicitud = {
-    nombre,
-    apellido,
-    rfc,
+    primerNombre,
+    segundoNombre,
+    apellidoPaterno,
+    apellidoMaterno,
+    correo,
+    celular,
     facturacion: parseFloat(facturacion),
+    rfc,
     razonSocial,
     tipoSociedad,
+    industria,
+    estado,
     montoCredito: parseFloat(montoCredito),
     plazo: parseInt(plazo, 10),
+    institucion,
+    urgencia,
     fecha: new Date(),
   };
 

@@ -56,6 +56,15 @@
   color: white;
 }
 
+/*  formato input numeros     */
+/* Inputs de números */
+.form-control.number-input {
+  text-align: right; /* Alinea el texto a la derecha */
+  font-family: "Courier New", monospace; /* Fuente para números */
+  font-size: 0.9rem; /* Tamaño adecuado */
+  color: #16c79a; /* Color distintivo */
+}
+
 /* Botón */
 .btn-submit {
   background: linear-gradient(145deg, #1e90ff, #00bfff);

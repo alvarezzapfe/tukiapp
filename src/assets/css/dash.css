@@ -156,26 +156,31 @@
 }
 
 /* tabla de solicitudes    */
+/* Tabla de Solicitudes */
 .creditos-table {
-  width: 80%;
+  width: 90%; /* Ancho mayor para más espacio */
   border-collapse: collapse;
   margin: 20px auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-size: 0.8rem; /* Tamaño reducido */
 }
-
-.creditos-table th {
-  background-color: #003366; /* Azul marino */
-  color: white;
-  text-transform: uppercase;
-  font-size: 0.9rem;
+.creditos-table th:nth-child(8),
+.creditos-table td:nth-child(8) {
+  width: 180px; /* Espacio suficiente para mostrar montos grandes */
+  text-align: right; /* Alineación a la derecha para montos */
 }
 
 .creditos-table td {
-  padding: 10px 15px;
-  font-size: 0.85rem;
+  padding: 8px 10px;
+  font-size: 0.85rem; /* Incrementa ligeramente el tamaño del texto */
   color: #333;
   border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.creditos-table {
+  table-layout: auto; /* Permite ajustar automáticamente el ancho de las columnas según el contenido */
 }
 
 .creditos-table tr:hover {
