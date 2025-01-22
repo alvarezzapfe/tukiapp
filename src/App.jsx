@@ -177,26 +177,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/*  Sección de Plataforma    */}
-
-      <section id="plataforma" className="py-5 text-center plataforma-section">
-        <div className="container">
-          {/* Título */}
-          <h1 className="mb-4">Buscamos Transformar el Sector PyME</h1>
-
-          {/* Mapa */}
-          <div className="map-container">
-            <div className="map">
-              {/* Representación gráfica del mapa de México */}
-              <div className="state" id="state-1"></div>
-              <div className="state" id="state-2"></div>
-              <div className="state" id="state-3"></div>
-              {/* Añadir más estados según sea necesario */}
-            </div>
-            <div className="neon-line"></div>
-          </div>
-        </div>
-      </section>
+      {/*  Sección por agregar    */}
 
       {/*  Modelo de Negocio Sección   */}
       <section id="modelo" className="py-5 text-center modelo-section">
