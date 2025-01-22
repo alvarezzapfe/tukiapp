@@ -24,6 +24,7 @@ import ProtectedRoute from "./ProtectedRoute"; // Ajusta la ruta según dónde c
 const Home = () => {
   const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
 
+  // Inicializar AOS
   useEffect(() => {
     AOS.init({
       duration: 600,
@@ -53,35 +54,66 @@ const Home = () => {
   return (
     <div>
       <Navbar />
+      {/* Sección Hero */}
       <header
         id="hero"
         className="hero_area text-center text-white"
         data-aos="fade-up"
       >
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
         <div className="container py-5">
-          <h1 className="display-4">Bienvenido a Weik</h1>
-          <p className="lead">
-            Acceso fácil a crédito justo para la Pequeña & Mediana Empresa en
-            México.
+          <h1 className="display-3 fw-bold mb-3" data-aos="fade-down">
+            Bienvenido a <span className="text-gradient">Weik</span>
+          </h1>
+          <p className="lead mb-4" data-aos="fade-right">
+            Impulsando el acceso a crédito justo y transparente para las PYMEs
+            en México.
           </p>
-          <button className="btn btn-light btn-lg mt-3">Conócenos</button>
+          <div className="cta-buttons" data-aos="fade-up">
+            <button className="btn btn-primary btn-lg mx-2">Conócenos</button>
+            <button className="btn btn-outline-light btn-lg mx-2">
+              Aprende Más
+            </button>
+          </div>
+        </div>
+
+        {/* Contenedor de gráficos y dashboard */}
+        <div className="hero-visuals">
+          <img src={logo} alt="Logotipo" className="logo-small" />
+          <div className="neon-effects">
+            <div className="neon-circle"></div>
+            <div className="neon-ray neon-ray-1"></div>
+            <div className="neon-ray neon-ray-2"></div>
+          </div>
         </div>
       </header>
+
+      {/* Sección Acerca de */}
       <section id="about" className="py-5 bg-light text-center">
         <div className="container">
           <h2 className="mb-4" data-aos="fade-up">
-            Acerca de Nosotros
+            Transformamos el Futuro Financiero
           </h2>
-          <p className="text-muted" data-aos="fade-up">
-            Tuki es una plataforma que utiliza un modelo propio e Inteligencia
-            Artificial para facilitar acceso a crédito simple.
-          </p>
-          <img src={logo} alt="Logotipo" className="logo-small mt-4" />
+          <div className="row align-items-center">
+            <div className="col-lg-6 mb-4" data-aos="fade-right">
+              <p className="text-muted">
+                Nuestra misión es revolucionar el acceso a crédito con
+                soluciones simples, personalizadas y transparentes para pequeñas
+                y medianas empresas. Ofrecemos herramientas técnicas y
+                financieras que empoderan la toma de decisiones.
+              </p>
+              <button className="btn btn-primary mt-3">Descubre Más</button>
+            </div>
+            <div className="col-lg-6" data-aos="fade-left">
+              <img
+                src={logo}
+                alt="Logotipo"
+                className="img-fluid rounded shadow-sm"
+              />
+            </div>
+          </div>
         </div>
       </section>
+
       <section id="columns" className="py-5 text-center" data-aos="fade-up">
         <div className="container expanded-section position-relative">
           <h2 className="mb-5">Explora Más</h2>

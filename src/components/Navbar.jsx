@@ -1,13 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../assets/images/logo1.png"; // Ruta correcta
-import "../assets/css/navbar.css"; // Ruta correcta
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import logo from "../assets/images/logo1.png";
+import "../assets/css/navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate(); // Hook para redirigir
+  const location = useLocation(); // Hook para saber la ruta actual
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  // Función para desplazarte a una sección específica
+  const handleScroll = (sectionId) => {
+    if (location.pathname !== "/") {
+      navigate("/"); // Navega a la página de inicio si no estás en ella
+      setTimeout(() => {
+        document
+          .getElementById(sectionId)
+          ?.scrollIntoView({ behavior: "smooth" });
+      }, 500); // Espera que la página cargue
+    } else {
+      document
+        .getElementById(sectionId)
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+    setMenuOpen(false); // Cierra el menú después de hacer clic
   };
 
   return (
@@ -16,35 +35,53 @@ const Navbar = () => {
         <Link to="/" className="navbar-logo">
           <img src={logo} alt="Logotipo" className="logo-small" />
         </Link>
-        <button
-          className={`menu-toggle ${menuOpen ? "open" : ""}`}
-          onClick={toggleMenu}
-        >
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </button>
+
         <ul className={`navbar-menu ${menuOpen ? "show" : ""}`}>
           <li>
-            <a href="/">Inicio</a>
+            <Link to="/" onClick={() => setMenuOpen(false)}>
+              Inicio
+            </Link>
           </li>
           <li>
-            <a href="#about">Acerca de</a>
+            <button
+              className="navbar-link"
+              onClick={() => handleScroll("about")}
+            >
+              Acerca de
+            </button>
           </li>
           <li>
-            <a href="#columns">Productos</a>
+            <button
+              className="navbar-link"
+              onClick={() => handleScroll("columns")}
+            >
+              Productos
+            </button>
           </li>
           <li>
-            <a href="#modelo">Modelo</a>
+            <button
+              className="navbar-link"
+              onClick={() => handleScroll("modelo")}
+            >
+              Modelo
+            </button>
           </li>
           <li>
-            <Link to="/simulador">Simulador</Link>
+            <Link to="/simulador" onClick={() => setMenuOpen(false)}>
+              Simulador
+            </Link>
           </li>
           <li>
-            <Link to="/solicitud">Solicitud</Link>
+            <Link to="/solicitud" onClick={() => setMenuOpen(false)}>
+              Solicitud
+            </Link>
           </li>
           <li>
-            <Link to="/login" className="btn btn-outline-light ms-3">
+            <Link
+              to="/login"
+              className="btn btn-outline-light ms-3"
+              onClick={() => setMenuOpen(false)}
+            >
               Login
             </Link>
           </li>

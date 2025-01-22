@@ -44,8 +44,9 @@
   list-style: none;
 }
 
-/* Enlaces del menú */
-.navbar-menu li a {
+/* Estilo para enlaces y botones del menú */
+.navbar-menu li a,
+.navbar-menu li button {
   color: #11698e; /* Verde azulado profundo */
   text-decoration: none;
   font-size: 16px; /* Reducir tamaño del texto */
@@ -53,98 +54,12 @@
   padding: 8px 12px; /* Reducir espaciado interno */
   border-radius: 5px;
   transition: all 0.3s ease;
+  background: none; /* Fondo transparente por defecto */
+  border: none; /* Sin borde para botones */
+  cursor: pointer; /* Manito para botones */
 }
 
-.navbar-menu li a:hover {
+.navbar-menu li a:hover,
+.navbar-menu li button:hover {
   color: #ffffff;
-  background: #16c79a; /* Verde menta brillante */
-  box-shadow: 0 4px 15px rgba(22, 199, 154, 0.5); /* Sombra ligera */
-  transform: scale(1.05); /* Pequeño efecto de agrandamiento */
-}
-
-/* Opción activa */
-.navbar-menu li a.active {
-  background: #16c79a;
-  color: #ffffff;
-  font-weight: 400; /* Un poco más grueso */
-  box-shadow: 0 4px 15px rgba(22, 199, 154, 0.5); /* Sombra ligera */
-}
-
-/* Menú responsivo: Botón hamburguesa */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 20px; /* Más pequeño */
-  width: 25px; /* Más pequeño */
-  cursor: pointer;
-}
-
-.menu-toggle .bar {
-  height: 2px;
-  width: 100%;
-  background: #11698e;
-  border-radius: 10px;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Transiciones de entrada para el menú */
-.navbar-menu.show {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 50px; /* Ajustar altura */
-  right: 10px;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 180px; /* Reducir ancho */
-  padding: 10px;
-  border-radius: 10px;
-  animation: slideIn 0.3s ease-in-out;
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
-  .navbar-container {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  /* Botón de menú hamburguesa */
-  .menu-toggle {
-    display: flex;
-    width: 25px; /* Reducido */
-    height: 18px; /* Reducido */
-  }
-
-  /* Ocultar el menú por defecto */
-  .navbar-menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 50px; /* Ajustar para la altura reducida */
-    right: 10px;
-    background: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 180px; /* Ancho reducido */
-    padding: 10px;
-    border-radius: 10px;
-    z-index: 1000;
-  }
-
-  /* Mostrar el menú cuando está activo */
-  .navbar-menu.show {
-    display: flex;
-  }
-
-  .navbar-menu li {
-    margin: 5px 0;
-  }
-
-  .navbar-menu li a {
-    padding: 8px 10px; /* Más pequeño */
-    text-align: left;
-    font-weight: 300; /* Texto delgado */
-  }
-}
+  background: #16c79a; /* Ver
