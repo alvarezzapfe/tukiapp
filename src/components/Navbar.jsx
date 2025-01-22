@@ -5,35 +5,35 @@ import "../assets/css/navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate(); // Hook para redirigir
-  const location = useLocation(); // Hook para saber la ruta actual
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  // Función para desplazarte a una sección específica
   const handleScroll = (sectionId) => {
     if (location.pathname !== "/") {
-      navigate("/"); // Navega a la página de inicio si no estás en ella
+      navigate("/");
       setTimeout(() => {
         document
           .getElementById(sectionId)
           ?.scrollIntoView({ behavior: "smooth" });
-      }, 500); // Espera que la página cargue
+      }, 500);
     } else {
       document
         .getElementById(sectionId)
         ?.scrollIntoView({ behavior: "smooth" });
     }
-    setMenuOpen(false); // Cierra el menú después de hacer clic
+    setMenuOpen(false);
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src={logo} alt="Logotipo" className="logo-small" />
+          <img src={logo} alt="Logotipo" className="navbar-logo-image" />
+          <span className="navbar-logo-text">MiEmpresa</span>
         </Link>
 
         <ul className={`navbar-menu ${menuOpen ? "show" : ""}`}>
