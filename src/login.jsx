@@ -6,7 +6,7 @@ import logo from "./assets/images/logo1.png";
 import Navbar from "./components/Navbar";
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState("clientes");
+  const [activeTab, setActiveTab] = useState("cliente");
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -20,14 +20,18 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/login",
+        "http://localhost:5001/api/auth/login",
         formData
       );
-      const { role } = response.data;
+      const { token, role } = response.data;
 
+      // Guardar token en localStorage
+      localStorage.setItem("token", token);
+
+      // Redirigir al usuario según el rol
       if (role === "admin") {
         navigate("/dash");
-      } else if (role === "cliente") {
+      } else if (role === "client") {
         navigate("/usuarios");
       }
     } catch (error) {
@@ -43,8 +47,8 @@ const Login = () => {
         <div className="login-card">
           <div className="tabs">
             <div
-              className={`tab ${activeTab === "clientes" ? "active" : ""}`}
-              onClick={() => setActiveTab("clientes")}
+              className={`tab ${activeTab === "cliente" ? "active" : ""}`}
+              onClick={() => setActiveTab("cliente")}
             >
               Cliente
             </div>
@@ -57,7 +61,7 @@ const Login = () => {
           </div>
           <div className="login-form">
             <h2>
-              {activeTab === "clientes" ? "Acceso Clientes" : "Acceso Admin"}
+              {activeTab === "cliente" ? "Acceso Clientes" : "Acceso Admin"}
             </h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
@@ -92,6 +96,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+
       {/* Footer */}
       <footer className="footer-section text-dark">
         <div className="container">

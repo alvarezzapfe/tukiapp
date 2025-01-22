@@ -19,6 +19,7 @@ import Dash from "./dash";
 import Usuarios from "./usuarios";
 import "@fontsource/poppins"; // Estilo normal
 import "@fontsource/poppins/600.css"; // Estilo bold
+import ProtectedRoute from "./ProtectedRoute"; // Ajusta la ruta según dónde creaste el archivo
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
@@ -416,12 +417,29 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        {/* Rutas públicas */}
         <Route path="/" element={<Home />} />
         <Route path="/simulador" element={<Simulador />} />
         <Route path="/login" element={<Login />} />
         <Route path="/solicitud" element={<Solicitud />} />
-        <Route path="/dash" element={<Dash />} />
-        <Route path="/usuarios" element={<Usuarios />} />
+
+        {/* Rutas protegidas */}
+        <Route
+          path="/dash"
+          element={
+            <ProtectedRoute>
+              <Dash />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/usuarios"
+          element={
+            <ProtectedRoute>
+              <Usuarios />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

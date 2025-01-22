@@ -1,31 +1,31 @@
 /* Página completa */
-/* Página Login */
+
+/* Página completa */
 .login-page {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  background: linear-gradient(145deg, #001f3f, #003b80);
-  color: #ffffff;
 }
-
-/* Contenedor de Login */
+/* Contenedor de la sección de login */
 .login-section {
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 80px); /* Descuenta la altura del navbar */
+  background: linear-gradient(145deg, #001f3f, #003b80);
+  padding: 20px;
 }
 
+/* Tarjeta de login */
 .login-card {
   background: #003b80;
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
   padding: 30px;
-  width: 500px;
-  max-width: 90%;
+  width: 100%;
+  max-width: 500px;
   color: white;
-  position: relative;
 }
 
 /* Pestañas */
@@ -91,7 +91,7 @@
   box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
 }
 
-/* Botón */
+/* Botón de envío */
 .btn-submit {
   width: 100%;
   padding: 10px;
@@ -157,4 +157,98 @@
   font-size: 1.2rem;
   margin-left: 5px; /* Espaciado para que no se pegue al texto */
   vertical-align: middle;
+}
+
+/*  logo  */
+/*   LOGO SMALL */
+
+/* Tamaño personalizado para el logotipo */
+.logo-small {
+  width: 40px; /* Cambia el tamaño según lo necesario */
+  height: auto; /* Mantén la proporción de aspecto */
+  margin-top: 10px; /* Espaciado opcional */
+  transition: transform 0.2s ease-in-out; /* Para animación */
+}
+
+/* Efecto hover para el logotipo */
+.logo-small:hover {
+  transform: scale(1.5); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
+/*  AJUSTES PARA VERSION MOBILE */
+
+/* Ajustes específicos para pantallas pequeñas */
+@media (max-width: 768px) {
+  /* Ajustar el contenedor de la página */
+  .login-page {
+    flex-direction: column;
+    height: auto;
+    padding: 20px; /* Espaciado alrededor */
+  }
+
+  /* Ajustar la sección de login */
+  .login-section {
+    padding: 10px; /* Reducir el padding */
+    justify-content: flex-start; /* Centrar hacia la parte superior */
+  }
+
+  /* Ajustar la tarjeta de login */
+  .login-card {
+    width: 90%; /* Ocupar el 90% del ancho de la pantalla */
+    max-width: 400px; /* Reducir el máximo para pantallas pequeñas */
+    padding: 20px; /* Reducir padding interno */
+    font-size: 0.9rem; /* Reducir tamaño del texto */
+  }
+
+  /* Ajustar pestañas */
+  .tabs {
+    flex-direction: column; /* Cambiar las pestañas a columnas */
+    gap: 10px; /* Espaciado entre las pestañas */
+  }
+
+  .tab {
+    font-size: 0.8rem; /* Reducir el tamaño de fuente */
+    padding: 8px; /* Reducir padding */
+  }
+
+  /* Formulario */
+  .login-form h2 {
+    font-size: 1.2rem; /* Reducir tamaño del título */
+  }
+
+  .form-group input {
+    padding: 8px; /* Reducir padding de los campos */
+    font-size: 0.8rem; /* Reducir tamaño de fuente */
+  }
+
+  /* Botón de envío */
+  .btn-submit {
+    font-size: 0.9rem; /* Reducir tamaño de fuente */
+    padding: 8px; /* Reducir padding */
+    border-radius: 20px; /* Redondear más */
+  }
+
+  /* Footer */
+  .footer-section {
+    font-size: 0.8rem; /* Reducir texto del footer */
+    padding: 15px 0; /* Reducir padding */
+  }
+
+  .footer-section h5 {
+    font-size: 1rem; /* Reducir tamaño del encabezado */
+  }
+
+  .footer-section a.footer-link {
+    font-size: 0.9rem; /* Reducir tamaño de enlaces */
+  }
+
+  .footer-line {
+    width: 80%; /* Reducir el ancho de la línea */
+  }
+
+  /* Logo */
+  .logo-small {
+    width: 30px; /* Reducir tamaño del logo */
+    margin-top: 5px; /* Ajustar espaciado superior */
+  }
 }

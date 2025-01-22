@@ -1,29 +1,47 @@
-require("dotenv").config();
+require("dotenv").config({ path: "../../.env" }); // Cargar variables de entorno
+console.log("MONGO_URI:", process.env.MONGO_URI);
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const helmet = require("helmet"); // Para mejorar la seguridad
 const rateLimit = require("express-rate-limit"); // Para limitar el número de solicitudes
+const mongoose = require("mongoose"); // Para conectarse a MongoDB
+
+// Importar rutas
+const authRoutes = require("../routes/authRoutes"); // Rutas de autenticación
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Middleware
-app.use(helmet()); // Seguridad básica (cabeceras HTTP seguras)
-app.use(bodyParser.json());
-app.use(cors());
+// --------------------------- Conexión a MongoDB ---------------------------
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Conexión a MongoDB exitosa"))
+  .catch((err) => console.error("Error al conectar a MongoDB:", err));
 
-// Límite de solicitudes por IP
+// --------------------------- Middleware ---------------------------
+app.use(helmet()); // Seguridad básica (cabeceras HTTP seguras)
+app.use(bodyParser.json()); // Parsear JSON en las solicitudes
+app.use(cors()); // Habilitar CORS para solicitudes desde otros dominios
+
+// --------------------------- Límite de solicitudes por IP ---------------------------
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 100, // Límite de 100 solicitudes por IP
   message:
     "Demasiadas solicitudes desde esta IP. Inténtalo de nuevo más tarde.",
 });
-app.use(limiter);
+app.use(limiter); // Aplicar el límite
 
-// Simulación de base de datos en memoria
-const solicitudes = [];
+// --------------------------- Rutas de autenticación ---------------------------
+app.use("/api/auth", authRoutes); // Usar rutas para autenticación
+
+// --------------------------- Simulación de base de datos en memoria ---------------------------
+const solicitudes = []; // Base de datos simulada para solicitudes
 
 // Ruta para guardar solicitudes
 app.post("/api/solicitudes", (req, res) => {
@@ -115,12 +133,12 @@ app.get("/api/solicitudes", (req, res) => {
   res.json(solicitudes);
 });
 
-// Ruta de prueba
+// --------------------------- Ruta de prueba ---------------------------
 app.get("/", (req, res) => {
   res.send("Servidor funcionando correctamente.");
 });
 
-// Inicia el servidor
+// --------------------------- Iniciar el servidor ---------------------------
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

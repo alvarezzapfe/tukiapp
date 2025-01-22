@@ -7,14 +7,18 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "aos": "^2.3.4",
     "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.7",
     "cra-template": "1.2.0",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.3",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
@@ -47,5 +51,18 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.0.7"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "createAdmin.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvarezzapfe/tukiapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvarezzapfe/tukiapp/issues"
+  },
+  "homepage": "https://github.com/alvarezzapfe/tukiapp#readme"
 }
