@@ -2,7 +2,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: bold, sans-serif;
+  font-family: "Roboto", sans-serif;
+
   color: #d4f1f4; /* Verde azulado claro */
   background-color: #1b1f3b; /* Azul marino oscuro */
 }
@@ -19,8 +20,6 @@ h5,
 h6 {
   font-family: "Roboto", sans-serif;
 }
-
-/* color: background: linear-gradient(rgba(27, 31, 59, 0.8), rgba(17, 105, 142, 0.6))  */
 
 /* Hero Section */
 .hero_area {
@@ -166,8 +165,8 @@ h6 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -2;
+  transform: translate(50%, 50%);
+  z-index: 0;
 }
 
 .neon-circle {
@@ -266,14 +265,12 @@ h6 {
 }
 
 /* Sección Columnas */
-/* Sección Columnas */
 #columns {
   background: linear-gradient(145deg, #001f3f, #002d6f, #003b80);
   color: #ffffff;
-  padding: 1500px 40px;
+  padding: 800px 40px;
 }
 
-/* Contenedor de las cajas */
 /* Contenedor de las cajas */
 .column-card {
   background: rgba(17, 105, 142, 0.6);
@@ -295,7 +292,6 @@ h6 {
 }
 
 /* Círculo de enumeración */
-/* Círculo de enumeración */
 .circle-enumeration {
   position: left;
   top: -30px; /* Ajusta la posición del círculo */
@@ -314,7 +310,6 @@ h6 {
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2); /* Reducido proporcionalmente */
 }
 
-/* Flecha animada en forma de "S" */
 /* Línea del rayo eléctrico */
 .arrow-electric {
   position: absolute;
@@ -351,8 +346,80 @@ h6 {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Sección Nuestro Modelo */
-/* Modelo Section */
+/* Sección de Plataforma */
+.plataforma-section {
+  background: white; /* Fondo azul marino */
+  color: white;
+  padding: 150px 0; /* Espaciado */
+  position: relative;
+}
+
+.plataforma-section h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #11698e; /* Blanco para el título */
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Tamaño del mapa */
+  margin-top: 50px;
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("ruta/al/mapa-de-mexico.png"); /* Ruta al mapa base */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.state {
+  position: absolute;
+  background-color: transparent;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.state:hover {
+  background-color: #39ff14; /* Verde fosforescente */
+  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+}
+
+.neon-line {
+  position: absolute;
+  width: 90%;
+  height: 2px;
+  background-color: #ffffff; /* Línea blanca */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  animation: neon-blink 1.5s infinite;
+  top: 90%;
+  left: 5%;
+}
+
+@keyframes neon-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .map-container {
+    height: 300px;
+  }
+
+  .plataforma-section h1 {
+    font-size: 2rem;
+  }
+}
+
 /* Sección Modelo de Negocio */
 .modelo-section {
   background-color: #ffffff; /* Fondo blanco */

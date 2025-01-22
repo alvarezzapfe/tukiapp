@@ -116,8 +116,8 @@ const Home = () => {
 
       <section id="columns" className="py-5 text-center" data-aos="fade-up">
         <div className="container expanded-section position-relative">
-          <h2 className="mb-5">Explora Más</h2>
-          <h3 className="mb-5">Nuestro proceso es simple</h3>
+          <h2 className="mb-5">Simplificamos el proceso</h2>
+          <h3 className="mb-5">1. Onboarding & Fondeo simple</h3>
           {/* Rayo eléctrico */}
           <div className="arrow-electric"></div>
 
@@ -173,6 +173,27 @@ const Home = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/*  Sección de Plataforma    */}
+
+      <section id="plataforma" className="py-5 text-center plataforma-section">
+        <div className="container">
+          {/* Título */}
+          <h1 className="mb-4">Buscamos Transformar el Sector PyME</h1>
+
+          {/* Mapa */}
+          <div className="map-container">
+            <div className="map">
+              {/* Representación gráfica del mapa de México */}
+              <div className="state" id="state-1"></div>
+              <div className="state" id="state-2"></div>
+              <div className="state" id="state-3"></div>
+              {/* Añadir más estados según sea necesario */}
+            </div>
+            <div className="neon-line"></div>
           </div>
         </div>
       </section>
