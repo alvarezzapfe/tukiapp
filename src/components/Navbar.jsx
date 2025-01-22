@@ -36,6 +36,12 @@ const Navbar = () => {
           <span className="navbar-logo-text">MiEmpresa</span>
         </Link>
 
+        <div className="hamburger-menu" onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+
         <ul className={`navbar-menu ${menuOpen ? "show" : ""}`}>
           <li>
             <Link to="/" onClick={() => setMenuOpen(false)}>
