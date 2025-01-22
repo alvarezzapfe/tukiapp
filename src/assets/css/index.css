@@ -21,6 +21,14 @@ h6 {
   font-family: "Roboto", sans-serif;
 }
 
+/*  Evitar desbordamiento en versiones mobiles   */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Previene el desplazamiento horizontal */
+}
+
 /* Hero Section */
 .hero_area {
   height: 100vh;
