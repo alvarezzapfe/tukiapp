@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
           <img src={logo} alt="Logotipo" className="navbar-logo-image" />
-          <span className="navbar-logo-text">MiEmpresa</span>
+          <span className="navbar-logo-text">Finaxis</span>
         </Link>
 
         <div className="hamburger-menu" onClick={toggleMenu}>

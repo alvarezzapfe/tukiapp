@@ -158,56 +158,75 @@ const Solicitud = () => {
       return;
     }
 
-    // Validar contraseña solo si crearCuenta es true
-    if (formData.crearCuenta) {
-      const passwordRegex =
-        /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,20}$/;
-      if (!passwordRegex.test(formData.contraseña)) {
-        alert(
-          "La contraseña debe tener entre 10 y 20 caracteres, incluir un número y un carácter especial."
-        );
-        setLoading(false);
-        return;
+    setLoading(true);
+
+    try {
+      // Si el usuario decide crear una cuenta
+      if (formData.crearCuenta) {
+        const passwordRegex =
+          /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,20}$/;
+        if (!passwordRegex.test(formData.contraseña)) {
+          alert(
+            "La contraseña debe tener entre 10 y 20 caracteres, incluir un número y un carácter especial."
+          );
+          setLoading(false);
+          return;
+        }
+
+        if (formData.contraseña !== formData.confirmarContraseña) {
+          alert("Las contraseñas no coinciden.");
+          setLoading(false);
+          return;
+        }
+
+        // Crear cuenta en el backend
+        try {
+          const usuarioResponse = await axios.post(
+            "http://localhost:5001/api/auth/register",
+            {
+              correo: formData.correo,
+              contraseña: formData.contraseña,
+              nombreCompleto: `${formData.primerNombre} ${formData.apellidoPaterno} ${formData.apellidoMaterno}`,
+            }
+          );
+          console.log("Cuenta creada:", usuarioResponse.data.message);
+
+          // Iniciar sesión automáticamente después de registrar
+          const loginResponse = await axios.post(
+            "http://localhost:5001/api/auth/login",
+            {
+              correo: formData.correo,
+              contraseña: formData.contraseña,
+            }
+          );
+
+          // Guardar token de autenticación en localStorage
+          localStorage.setItem("token", loginResponse.data.token);
+          console.log("Sesión iniciada para el usuario registrado.");
+        } catch (error) {
+          console.error("Error al crear la cuenta o iniciar sesión:", error);
+          setLoading(false);
+          return;
+        }
       }
 
-      if (formData.contraseña !== formData.confirmarContraseña) {
-        alert("Las contraseñas no coinciden.");
-        setLoading(false);
-        return;
-      }
-
-      // Crear cuenta en el backend
+      // Enviar solicitud al backend (siempre disponible, con o sin registro)
       try {
-        const usuarioResponse = await axios.post(
-          "http://localhost:5001/api/usuarios",
+        const solicitudResponse = await axios.post(
+          "http://localhost:5001/api/solicitudes",
           {
-            correo: formData.correo,
-            contraseña: formData.contraseña,
+            ...formData,
+            montoCredito: parseFloat(formData.montoCredito.replace(/,/g, "")),
+            facturacion: parseFloat(formData.facturacion.replace(/,/g, "")),
           }
         );
-        console.log("Cuenta creada:", usuarioResponse.data.message);
+        console.log("Solicitud enviada:", solicitudResponse.data.message);
+        setShowPopup(true);
       } catch (error) {
-        console.error("Error al crear la cuenta:", error);
-        setLoading(false);
-        return;
+        console.error("Error al enviar la solicitud:", error);
       }
-    }
-
-    // Enviar solicitud al backend
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        "http://localhost:5001/api/solicitudes",
-        {
-          ...formData,
-          montoCredito: parseFloat(formData.montoCredito.replace(/,/g, "")),
-          facturacion: parseFloat(formData.facturacion.replace(/,/g, "")),
-        }
-      );
-      console.log(response.data.message);
-      setShowPopup(true);
     } catch (error) {
-      console.error("Error al enviar la solicitud:", error);
+      console.error("Error en el proceso de registro o envío:", error);
     } finally {
       setLoading(false);
     }

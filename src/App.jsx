@@ -20,6 +20,7 @@ import Usuarios from "./usuarios";
 import "@fontsource/poppins"; // Estilo normal
 import "@fontsource/poppins/600.css"; // Estilo bold
 import ProtectedRoute from "./ProtectedRoute"; // Ajusta la ruta según dónde creaste el archivo
+import AccessDenied from "./AccessDenied"; // Ajusta la ruta según la estructura de tu proyecto
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
@@ -62,7 +63,7 @@ const Home = () => {
       >
         <div className="container py-5">
           <h1 className="display-3 fw-bold mb-3" data-aos="fade-down">
-            Bienvenido a <span className="text-gradient">Weik</span>
+            Bienvenido a <span className="text-gradient">Finaxis</span>
           </h1>
           <p className="lead mb-4" data-aos="fade-right">
             Impulsando el acceso a crédito justo y transparente para las PYMEs
@@ -79,11 +80,7 @@ const Home = () => {
         {/* Contenedor de gráficos y dashboard */}
         <div className="hero-visuals">
           <img src={logo} alt="Logotipo" className="logo-small" />
-          <div className="neon-effects">
-            <div className="neon-circle"></div>
-            <div className="neon-ray neon-ray-1"></div>
-            <div className="neon-ray neon-ray-2"></div>
-          </div>
+          <div className="neon-effects"></div>
         </div>
       </header>
 
@@ -404,9 +401,9 @@ const Home = () => {
             <div className="col text-center">
               <p className="small">
                 Infraestructura en Finanzas AI, Sociedad Anónima Promotora de
-                Inversión de Capital Variable, ("Tuki"), para su constitución y
-                operación con tal carácter, no requiere de autorización de la
-                Secretaría de Hacienda y Crédito Público. Tuki ©. Todos los
+                Inversión de Capital Variable, ("Finaxis"), para su constitución
+                y operación con tal carácter, no requiere de autorización de la
+                Secretaría de Hacienda y Crédito Público. Finaxis ©. Todos los
                 derechos reservados. Prohibida la reproducción total o parcial
                 del contenido de este sitio. * Todo el análisis es generado con
                 herramientas y desarrollo interno.
@@ -456,12 +453,13 @@ const App = () => {
         <Route path="/simulador" element={<Simulador />} />
         <Route path="/login" element={<Login />} />
         <Route path="/solicitud" element={<Solicitud />} />
+        <Route path="/access-denied" element={<AccessDenied />} />
 
         {/* Rutas protegidas */}
         <Route
           path="/dash"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={["admin"]}>
               <Dash />
             </ProtectedRoute>
           }
@@ -469,7 +467,7 @@ const App = () => {
         <Route
           path="/usuarios"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={["client"]}>
               <Usuarios />
             </ProtectedRoute>
           }

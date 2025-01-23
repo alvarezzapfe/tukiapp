@@ -1,139 +1,82 @@
-require("dotenv").config({ path: "../../.env" }); // Cargar variables de entorno
-console.log("MONGO_URI:", process.env.MONGO_URI);
-
+require("dotenv").config({ path: "../../.env" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const helmet = require("helmet"); // Para mejorar la seguridad
-const rateLimit = require("express-rate-limit"); // Para limitar el número de solicitudes
-const mongoose = require("mongoose"); // Para conectarse a MongoDB
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const mongoose = require("mongoose");
 
-// Importar rutas
-const authRoutes = require("../routes/authRoutes"); // Rutas de autenticación
+const { router: authRoutes } = require("../routes/authRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
 // --------------------------- Conexión a MongoDB ---------------------------
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Conexión a MongoDB exitosa"))
-  .catch((err) => console.error("Error al conectar a MongoDB:", err));
+const connectToMongoDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      dbName: "tuki_db",
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 60000,
+    });
+    console.log("Conexión inicial a MongoDB exitosa");
+  } catch (error) {
+    console.error("Error al conectar a MongoDB:", error.message);
+    setTimeout(connectToMongoDB, 5000); // Reintentar conexión cada 5 segundos
+  }
+};
+
+// Eventos de conexión y reconexión
+mongoose.connection.on("connected", () => {
+  console.log("Conexión a MongoDB exitosa.");
+});
+
+mongoose.connection.on("disconnected", () => {
+  console.error("Conexión a MongoDB perdida. Intentando reconectar...");
+  connectToMongoDB();
+});
+
+mongoose.connection.on("error", (err) => {
+  console.error("Error en MongoDB:", err.message);
+});
+
+mongoose.connection.on("close", () => {
+  console.error("La conexión con MongoDB se cerró inesperadamente.");
+});
+
+// Inicia la conexión
+connectToMongoDB();
 
 // --------------------------- Middleware ---------------------------
-app.use(helmet()); // Seguridad básica (cabeceras HTTP seguras)
-app.use(bodyParser.json()); // Parsear JSON en las solicitudes
-app.use(cors()); // Habilitar CORS para solicitudes desde otros dominios
+app.use(helmet());
+app.use(bodyParser.json());
+app.use(cors());
 
-// --------------------------- Límite de solicitudes por IP ---------------------------
+// --------------------------- Límite de solicitudes ---------------------------
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 100, // Límite de 100 solicitudes por IP
-  message:
-    "Demasiadas solicitudes desde esta IP. Inténtalo de nuevo más tarde.",
+  max: 100, // Máximo de 100 solicitudes por IP
+  message: "Demasiadas solicitudes. Inténtalo más tarde.",
 });
-app.use(limiter); // Aplicar el límite
+app.use(limiter);
 
-// --------------------------- Rutas de autenticación ---------------------------
-app.use("/api/auth", authRoutes); // Usar rutas para autenticación
-
-// --------------------------- Simulación de base de datos en memoria ---------------------------
-const solicitudes = []; // Base de datos simulada para solicitudes
-
-// Ruta para guardar solicitudes
-app.post("/api/solicitudes", (req, res) => {
-  const {
-    primerNombre,
-    segundoNombre,
-    apellidoPaterno,
-    apellidoMaterno,
-    correo,
-    celular,
-    facturacion,
-    rfc,
-    razonSocial,
-    tipoSociedad,
-    industria,
-    estado,
-    montoCredito,
-    plazo,
-    institucion,
-    urgencia,
-  } = req.body;
-
-  // Validación básica de campos obligatorios
-  if (
-    !primerNombre ||
-    !apellidoPaterno ||
-    !apellidoMaterno ||
-    !correo ||
-    !celular ||
-    !facturacion ||
-    !rfc ||
-    !razonSocial ||
-    !tipoSociedad ||
-    !industria ||
-    !estado ||
-    !montoCredito ||
-    !plazo ||
-    !institucion ||
-    !urgencia
-  ) {
-    return res.status(400).json({ error: "Faltan datos obligatorios." });
-  }
-
-  // Validación adicional
-  const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!correoRegex.test(correo)) {
-    return res.status(400).json({ error: "Correo electrónico no válido." });
-  }
-
-  if (isNaN(celular) || celular.length !== 10) {
+// Middleware para verificar conexión activa
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    console.error(
+      "Base de datos no conectada. Estado:",
+      mongoose.connection.readyState
+    );
     return res
-      .status(400)
-      .json({ error: "El celular debe contener exactamente 10 dígitos." });
+      .status(503)
+      .json({ error: "La base de datos no está conectada." });
   }
-
-  if (isNaN(parseFloat(facturacion)) || isNaN(parseFloat(montoCredito))) {
-    return res
-      .status(400)
-      .json({ error: "Facturación y monto de crédito deben ser números." });
-  }
-
-  // Crear nueva solicitud
-  const nuevaSolicitud = {
-    primerNombre,
-    segundoNombre,
-    apellidoPaterno,
-    apellidoMaterno,
-    correo,
-    celular,
-    facturacion: parseFloat(facturacion),
-    rfc,
-    razonSocial,
-    tipoSociedad,
-    industria,
-    estado,
-    montoCredito: parseFloat(montoCredito),
-    plazo: parseInt(plazo, 10),
-    institucion,
-    urgencia,
-    fecha: new Date(),
-  };
-
-  solicitudes.push(nuevaSolicitud);
-  res.status(201).json({ message: "Solicitud guardada con éxito." });
+  next();
 });
 
-// Ruta para obtener todas las solicitudes
-app.get("/api/solicitudes", (req, res) => {
-  res.json(solicitudes);
-});
+// --------------------------- Rutas ---------------------------
+app.use("/api/auth", authRoutes);
 
-// --------------------------- Ruta de prueba ---------------------------
 app.get("/", (req, res) => {
   res.send("Servidor funcionando correctamente.");
 });

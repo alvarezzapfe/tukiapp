@@ -18,11 +18,26 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Reiniciar mensaje de error
+
+    // Validación del correo electrónico y contraseña en el frontend
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError("Por favor, ingresa un correo electrónico válido.");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:5001/api/auth/login",
         formData
       );
+
       const { token, role } = response.data;
 
       // Guardar token en localStorage
@@ -33,10 +48,15 @@ const Login = () => {
         navigate("/dash");
       } else if (role === "client") {
         navigate("/usuarios");
+      } else {
+        setError("Rol no reconocido. Por favor, contacta al administrador.");
       }
-    } catch (error) {
-      setError("Credenciales inválidas. Por favor, intenta de nuevo.");
-      console.error("Error en el login:", error);
+    } catch (err) {
+      const errorMsg =
+        err.response?.data?.message ||
+        "Error al iniciar sesión. Intenta nuevamente.";
+      setError(errorMsg);
+      console.error("Error en el login:", err);
     }
   };
 
@@ -100,19 +120,14 @@ const Login = () => {
       {/* Footer */}
       <footer className="footer-section text-dark">
         <div className="container">
-          {/* Logotipo */}
           <div className="row justify-content-center mb-4">
             <div className="col-md-4 text-center">
               <img src={logo} alt="Logotipo" className="logo-small" />
             </div>
           </div>
-
-          {/* Línea Separadora */}
           <div className="footer-bottom text-center mt-4">
             <hr className="footer-line" />
           </div>
-
-          {/* Leyenda y Créditos */}
           <div className="row mt-4">
             <div className="col text-center">
               <p className="small">
@@ -126,8 +141,6 @@ const Login = () => {
               </p>
             </div>
           </div>
-
-          {/* Créditos Finales */}
           <div className="row mt-4">
             <div className="col text-center">
               <p className="footer-credits small">
