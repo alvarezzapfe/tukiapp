@@ -63,7 +63,7 @@ const Home = () => {
       >
         <div className="container py-5">
           <h1 className="display-3 fw-bold mb-3" data-aos="fade-down">
-            Bienvenido a <span className="text-gradient">Finaxis</span>
+            Bienvenido a <span className="text-gradient">Lauter</span>
           </h1>
           <p className="lead mb-4" data-aos="fade-right">
             Impulsando el acceso a crédito justo y transparente para las PYMEs
@@ -401,9 +401,9 @@ const Home = () => {
             <div className="col text-center">
               <p className="small">
                 Infraestructura en Finanzas AI, Sociedad Anónima Promotora de
-                Inversión de Capital Variable, ("Finaxis"), para su constitución
+                Inversión de Capital Variable, ("Lauter"), para su constitución
                 y operación con tal carácter, no requiere de autorización de la
-                Secretaría de Hacienda y Crédito Público. Finaxis ©. Todos los
+                Secretaría de Hacienda y Crédito Público. Lauter ©. Todos los
                 derechos reservados. Prohibida la reproducción total o parcial
                 del contenido de este sitio. * Todo el análisis es generado con
                 herramientas y desarrollo interno.
