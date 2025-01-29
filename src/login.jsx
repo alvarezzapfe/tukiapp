@@ -6,21 +6,23 @@ import logo from "./assets/images/logo1.png";
 import Navbar from "./components/Navbar";
 
 const Login = () => {
-  const [activeTab, setActiveTab] = useState("cliente");
+  const [activeTab, setActiveTab] = useState("cliente"); // Para distinguir entre cliente y admin
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Manejar los cambios en los inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Manejar el inicio de sesión
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reiniciar mensaje de error
+    setError(""); // Reiniciar el mensaje de error
 
-    // Validación del correo electrónico y contraseña en el frontend
+    // Validar el correo electrónico y la contraseña en el frontend
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setError("Por favor, ingresa un correo electrónico válido.");
@@ -33,21 +35,25 @@ const Login = () => {
     }
 
     try {
+      // Agregar el rol activo (cliente o admin) al formData
       const response = await axios.post(
         "http://localhost:5001/api/auth/login",
-        formData
+        {
+          ...formData,
+          role: activeTab, // "cliente" o "admin"
+        }
       );
 
-      const { token, role } = response.data;
+      const { token, user } = response.data;
 
       // Guardar token en localStorage
       localStorage.setItem("token", token);
 
       // Redirigir al usuario según el rol
-      if (role === "admin") {
-        navigate("/dash");
-      } else if (role === "client") {
-        navigate("/usuarios");
+      if (user.role === "admin") {
+        navigate("/dash"); // Redirigir al dashboard admin
+      } else if (user.role === "user") {
+        navigate("/usuarios"); // Redirigir a la vista de usuarios
       } else {
         setError("Rol no reconocido. Por favor, contacta al administrador.");
       }
@@ -66,6 +72,7 @@ const Login = () => {
       <div className="login-section">
         <div className="login-card">
           <div className="tabs">
+            {/* Selector de cliente o administrador */}
             <div
               className={`tab ${activeTab === "cliente" ? "active" : ""}`}
               onClick={() => setActiveTab("cliente")}

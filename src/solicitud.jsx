@@ -5,7 +5,7 @@ import "./assets/css/solicitud.css";
 import logo from "./assets/images/logo1.png";
 
 const Solicitud = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({
     primerNombre: "",
     segundoNombre: "",
@@ -23,10 +23,8 @@ const Solicitud = () => {
     plazo: "",
     institucion: "",
     urgencia: "",
-    crearCuenta: false, // Nuevo estado para checkbox
-    contraseña: "", // Campo para la contraseña
-    confirmarContraseña: "", // Campo para confirmar la contraseña
   });
+
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -137,96 +135,48 @@ const Solicitud = () => {
 
   const handleNextStep = (e) => {
     e.preventDefault();
-
-    // Si estamos en el paso 3 y no desea crear cuenta, enviar directamente
-    if (step === 3 && !formData.crearCuenta) {
-      handleSubmit(e);
-    } else if (step === 3 && formData.crearCuenta) {
-      setStep(4); // Avanzar al paso 4 si crearCuenta está seleccionado
-    } else {
-      setStep(step + 1);
-    }
+    setStep(step + 1);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.correo)) {
-      alert("Por favor, introduce un correo electrónico válido.");
-      setLoading(false);
-      return;
-    }
-
     setLoading(true);
 
+    // Limpiamos los valores de montoCredito y facturacion
+    const montoCreditoParsed = parseFloat(
+      formData.montoCredito.replace(/,/g, "")
+    );
+    const facturacionParsed = parseFloat(
+      formData.facturacion.replace(/,/g, "")
+    );
+
+    // Construimos el objeto con la data a enviar
+    const dataToSend = {
+      ...formData,
+      montoCredito: montoCreditoParsed,
+      facturacion: facturacionParsed,
+    };
+
+    console.log("Enviando datos al backend:", dataToSend);
+
     try {
-      // Si el usuario decide crear una cuenta
-      if (formData.crearCuenta) {
-        const passwordRegex =
-          /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{10,20}$/;
-        if (!passwordRegex.test(formData.contraseña)) {
-          alert(
-            "La contraseña debe tener entre 10 y 20 caracteres, incluir un número y un carácter especial."
-          );
-          setLoading(false);
-          return;
-        }
+      const response = await axios.post(
+        "http://localhost:5001/api/solicitudes",
+        dataToSend
+      );
 
-        if (formData.contraseña !== formData.confirmarContraseña) {
-          alert("Las contraseñas no coinciden.");
-          setLoading(false);
-          return;
-        }
+      console.log("Respuesta del backend:", response.data);
 
-        // Crear cuenta en el backend
-        try {
-          const usuarioResponse = await axios.post(
-            "http://localhost:5001/api/auth/register",
-            {
-              correo: formData.correo,
-              contraseña: formData.contraseña,
-              nombreCompleto: `${formData.primerNombre} ${formData.apellidoPaterno} ${formData.apellidoMaterno}`,
-            }
-          );
-          console.log("Cuenta creada:", usuarioResponse.data.message);
-
-          // Iniciar sesión automáticamente después de registrar
-          const loginResponse = await axios.post(
-            "http://localhost:5001/api/auth/login",
-            {
-              correo: formData.correo,
-              contraseña: formData.contraseña,
-            }
-          );
-
-          // Guardar token de autenticación en localStorage
-          localStorage.setItem("token", loginResponse.data.token);
-          console.log("Sesión iniciada para el usuario registrado.");
-        } catch (error) {
-          console.error("Error al crear la cuenta o iniciar sesión:", error);
-          setLoading(false);
-          return;
-        }
-      }
-
-      // Enviar solicitud al backend (siempre disponible, con o sin registro)
-      try {
-        const solicitudResponse = await axios.post(
-          "http://localhost:5001/api/solicitudes",
-          {
-            ...formData,
-            montoCredito: parseFloat(formData.montoCredito.replace(/,/g, "")),
-            facturacion: parseFloat(formData.facturacion.replace(/,/g, "")),
-          }
-        );
-        console.log("Solicitud enviada:", solicitudResponse.data.message);
-        setShowPopup(true);
-      } catch (error) {
-        console.error("Error al enviar la solicitud:", error);
+      if (response.status === 200 || response.status === 201) {
+        console.log("Solicitud enviada correctamente.");
+        setStep(5); // Pasamos al paso 5 solo si se envió correctamente
+      } else {
+        console.error("Error en la respuesta del backend:", response);
+        alert("Error al enviar la solicitud. Revisa los datos.");
       }
     } catch (error) {
-      console.error("Error en el proceso de registro o envío:", error);
+      console.error("Error al enviar la solicitud:", error.response || error);
+      alert("No se pudo enviar la solicitud. Intenta nuevamente.");
     } finally {
       setLoading(false);
     }
@@ -257,6 +207,25 @@ const Solicitud = () => {
 
   const renderStep = () => {
     switch (step) {
+      case 0:
+        return (
+          <div className="start-box">
+            <h2>Bienvenido</h2>
+            <p>Haz clic en el botón para iniciar tu solicitud de crédito.</p>
+            <button
+              className="start-button"
+              onClick={() => setStep(1)}
+              style={{
+                backgroundColor: "#00FF00",
+                color: "#000",
+                fontWeight: "bold",
+              }}
+            >
+              Iniciar Solicitud
+            </button>
+          </div>
+        );
+
       case 1:
         return (
           <>
@@ -332,6 +301,9 @@ const Solicitud = () => {
                 />
               </div>
             </div>
+            <button type="button" className="btn-next" onClick={handleNextStep}>
+              Siguiente
+            </button>
           </>
         );
 
@@ -431,6 +403,9 @@ const Solicitud = () => {
                 </select>
               </div>
             </div>
+            <button type="button" className="btn-next" onClick={handleNextStep}>
+              Siguiente
+            </button>
           </>
         );
       case 3:
@@ -497,71 +472,80 @@ const Solicitud = () => {
                 </select>
               </div>
             </div>
-            <div className="form-row">
-              <div className="form-column">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="crearCuenta"
-                    checked={formData.crearCuenta}
-                    onChange={handleInputChange}
-                  />{" "}
-                  ¿Deseas crear una cuenta de usuario? <br />
-                  <small className="password-hint">
-                    La contraseña debe contener al menos 10 caracteres, un
-                    número y un carácter especial.
-                  </small>
-                </label>
-              </div>
-            </div>
+            <button type="button" className="btn-next" onClick={handleNextStep}>
+              Siguiente
+            </button>
           </>
         );
 
       case 4:
         return (
-          <>
-            <div className="form-row">
-              <h3 className="form-title">Crear tu Cuenta</h3>
-              <p className="form-description">
-                Antes de enviar tu solicitud, ingresa una contraseña para crear
-                tu cuenta.
-              </p>
+          <div className="confirmacion-container">
+            <h3 className="form-title">Revisa tu Solicitud</h3>
+            <p className="form-description">
+              Presiona "Enviar Solicitud" para finalizar tu proceso.
+            </p>
+            <button
+              type="button"
+              className="btn-submit"
+              onClick={handleSubmit} // Llamamos a handleSubmit antes de avanzar al paso 5
+              disabled={loading}
+            >
+              {loading ? "Procesando..." : "Confirmar y Enviar"}
+            </button>
+          </div>
+        );
+
+      case 5:
+        const monto = parseFloat(formData.montoCredito.replace(/,/g, ""));
+        const plazo = parseInt(formData.plazo);
+        const tasas = [
+          { nombre: "Mejor Tasa", tasa: 0.19, color: "#16c79a" }, // Verde
+          { nombre: "Tasa Mediana", tasa: 0.235, color: "#ffcc00" }, // Amarillo
+          { nombre: "Tasa Más Alta", tasa: 0.35, color: "#ff4d4d" }, // Rojo
+        ];
+
+        return (
+          <div className="preoferta-container">
+            <h3 className="preoferta-title">🏦 Tu Preoferta de Crédito</h3>
+            <div className="preoferta-grid">
+              {tasas.map((opcion, index) => {
+                const interesTotal = monto * opcion.tasa;
+                const pagoMensual = (monto + interesTotal) / plazo;
+                return (
+                  <div
+                    key={index}
+                    className="preoferta-item"
+                    style={{ borderColor: opcion.color }}
+                  >
+                    <h4 style={{ color: opcion.color }}>{opcion.nombre}</h4>
+                    <p
+                      className="tasa-label"
+                      style={{ background: opcion.color }}
+                    >
+                      Tasa: <strong>{(opcion.tasa * 100).toFixed(2)}%</strong>
+                    </p>
+                    <p>
+                      Monto Total:{" "}
+                      <strong>
+                        $
+                        {Math.round(monto + interesTotal).toLocaleString(
+                          "es-MX"
+                        )}
+                      </strong>
+                    </p>
+                    <p>
+                      Pago Mensual:{" "}
+                      <strong>
+                        ${Math.round(pagoMensual).toLocaleString("es-MX")}
+                      </strong>
+                    </p>
+                  </div>
+                );
+              })}
             </div>
-            <div className="form-row">
-              <div className="form-column">
-                <label>Contraseña</label>
-                <input
-                  type="password"
-                  name="contraseña"
-                  className="form-control"
-                  value={formData.contraseña}
-                  onChange={handleInputChange}
-                  maxLength="20"
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-column">
-                <label>Confirmar Contraseña</label>
-                <input
-                  type="password"
-                  name="confirmarContraseña"
-                  className="form-control"
-                  value={formData.confirmarContraseña}
-                  onChange={handleInputChange}
-                  maxLength="20"
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-row">
-              <p className="text">
-                La contraseña debe contener al menos 10 caracteres, un número y
-                un carácter especial.
-              </p>
-            </div>
-          </>
+            <div className="snake-line"></div>
+          </div>
         );
 
       default:
@@ -577,9 +561,6 @@ const Solicitud = () => {
           <h2>Solicitud de Crédito</h2>
           <form onSubmit={step === 4 ? handleSubmit : handleNextStep}>
             {renderStep()}
-            <button type="submit" className="btn-submit">
-              {step === 4 ? "Enviar Solicitud" : "Siguiente"}
-            </button>
           </form>
         </div>
       </div>
