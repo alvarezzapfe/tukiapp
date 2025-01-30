@@ -316,6 +316,112 @@ html {
   background-color: #0056b3;
 }
 
+/*  Sección Productos  */
+
+/* Sección Productos */
+#productos {
+  background-color: #ffffff;
+  padding: 70px 0;
+  color: #001f3f;
+  text-align: center;
+}
+
+#productos h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #001f3f;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.product-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: linear-gradient(145deg, #dff3f5, #bfe4e7);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  width: 340px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.3);
+}
+
+.product-card .icono {
+  font-size: 3.5rem;
+  color: #16c79a;
+  margin-bottom: 15px;
+}
+
+.product-card h5 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #003b80;
+  margin-bottom: 15px;
+}
+
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #1e2a38;
+}
+
+.product-list li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+}
+
+.product-list li::before {
+  content: "\2714";
+  color: #16c79a;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 1024px) {
+  .product-card {
+    width: 90%;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-card {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
 /* Sección Columnas */
 #columns {
   background: linear-gradient(145deg, #001f3f, #002d6f, #003b80);
@@ -414,13 +520,14 @@ html {
 /* Sección Modelo de Negocio */
 .modelo-section {
   background-color: #ffffff; /* Fondo blanco */
-  padding: 100px 0; /* Expandir área */
+  padding: 100px 0;
+  color: #001f3f; /* Expandir área */
 }
 
 .modelo-section h1 {
   font-size: 2.8rem;
   font-weight: bold;
-  color: #11698e; /* Verde azulado profundo */
+  color: #001f3f; /* Azul marino */
 }
 
 .modelo-section p {
@@ -432,7 +539,7 @@ html {
 .subtitulo {
   font-size: 2rem;
   font-weight: bold;
-  color: #11698e; /* Mismo color que el título principal */
+  color: #001f3f; /* Azul marino */
 }
 
 /* Estilo de las tarjetas */
@@ -476,85 +583,87 @@ html {
   font-size: 1rem;
 }
 
-/* Estilo de las tarjetas de empresas */
-.empresa-card {
-  background: linear-gradient(
-    145deg,
-    #1a2a3a,
-    #0e3b2f
-  ); /* Azul marino y verde gradiente */
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  color: white;
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+  .modelo-card {
+    height: auto; /* Ajusta la altura en pantallas pequeñas */
+  }
 }
 
-.empresa-img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #16c79a;
+/* ================= FAQ SECTION ================= */
+.faq-section {
+  background: #f8f9fa; /* Fondo suave */
+  padding: 80px 20px;
 }
 
-.empresa-title {
-  font-size: 1.5rem;
+.faq-section h2 {
+  font-size: 2.5rem;
   font-weight: bold;
-  color: #16c79a;
+  color: #003b80; /* Cambia el color a azul marino */
+}
+
+.faq-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.faq-box {
+  background: linear-gradient(135deg, #16c79a, #13a67f);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 45%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
   position: relative;
+  overflow: hidden;
 }
 
-.blinking-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #16c79a;
-  border-radius: 50%;
-  margin-left: 10px;
-  animation: blink 1.5s infinite;
+.faq-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.empresa-content {
-  font-size: 1rem;
-  color: #b0c7d1;
-  list-style: disc;
-  padding-left: 20px;
-}
-
-/* Zoom out para imagen específica */
-.zoom-out {
-  transform: scale(0.9); /* Reducir tamaño inicial */
+.faq-question i {
+  font-size: 18px;
   transition: transform 0.3s ease;
 }
 
-.zoom-out:hover {
-  transform: scale(1); /* Volver al tamaño original al pasar el cursor */
+.faq-box.open .faq-question i {
+  transform: rotate(180deg);
 }
 
-/* Ajustes Responsivos */
-@media (max-width: 768px) {
-  .modelo-card,
-  .empresa-card {
-    height: auto; /* Ajusta la altura en pantallas pequeñas */
-  }
+/* Respuesta oculta por defecto */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: 0;
+}
+
+/* Mostrar respuesta cuando está abierta */
+.faq-answer.show {
+  max-height: 200px;
+  opacity: 1;
 }
 
 /* Sección Footer */
 
 .footer-section {
   background: #ffffff; /* Fondo blanco */
-  color: #1b1f3b; /* Azul marino */
+  color: #003b80; /* Azul marino */
   padding: 80px 0;
   font-size: 0.9rem;
 }
@@ -566,7 +675,7 @@ html {
 }
 
 .footer-section a.footer-link {
-  color: #1b1f3b; /* Azul marino */
+  color: #003b80; /* Azul marino */
   text-decoration: none;
 }
 
@@ -588,7 +697,7 @@ html {
 
 .footer-credits {
   font-size: 0.75rem; /* Letra más pequeña */
-  color: #1b1f3b;
+  color: #003b80;
   margin-top: 10px;
   line-height: 1.5;
 }

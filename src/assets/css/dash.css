@@ -1,32 +1,152 @@
-/* Página completa */
+/* ================== DASHBOARD GENERAL ================== */
 .dash-page {
   display: flex;
-  height: 100vh; /* Ocupa toda la pantalla */
-  background-color: #f4f4f9;
-  overflow: hidden; /* Evitar scroll innecesario */
+  height: 100vh;
+  background: #003b80;
+  overflow: hidden;
 }
 
-/* Barra Lateral */
+/* ================== MENÚ HAMBURGUESA ================== */
+
+/* 🔹 Cambiar títulos a color blanco */
+h1,
+h3 {
+  color: #ffffff !important;
+}
+
+/* 🔹 Estilos del menú de hamburguesa */
+.menu-hamburguesa {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.menu-dropdown button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+/* 🔹 Ajuste del Header del Dashboard */
+.dashboard-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* ================== DASHBOARD Sección ================== */
+
+/* 🔹 Grid de métricas 3x2 */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  width: 90%;
+  margin-top: 20px;
+  height: 60vh; /* Ajusta para que encaje sin scroll */
+}
+
+/* 🔹 Tarjetas de métricas */
+.dashboard-card {
+  background: linear-gradient(145deg, #ffffff, #f3f6fb);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 3px 6px 12px rgba(0, 85, 170, 0.2);
+}
+
+/* 🔹 Color azul para títulos en las tarjetas */
+.dashboard-card h3 {
+  color: #0056b3 !important; /* Azul oscuro */
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.dashboard-card p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #16c79a;
+}
+
+/* 🔹 Estilo de gráficos */
+.dashboard-card canvas {
+  max-width: 100%;
+  max-height: 150px;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+/* ================== SIDEBAR ================== */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  width: 70px;
-  background: linear-gradient(145deg, #dff3f5, #bfe4e7);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  width: 80px;
+  background: linear-gradient(145deg, #0b2239, #1b3350);
+  box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  border-radius: 0 15px 15px 0;
-  transition: width 0.3s ease, box-shadow 0.3s ease;
+  transition: width 0.3s ease-in-out;
   z-index: 1000;
 }
 
 .sidebar:hover {
   width: 250px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-item {
@@ -35,228 +155,203 @@
   align-items: center;
   gap: 15px;
   padding: 15px;
-  color: #333;
+  color: #ffffff;
   text-decoration: none;
-  font-size: 16px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 14px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #16c79a;
 }
 
 .sidebar-item i {
-  font-size: 20px;
+  font-size: 18px;
+  min-width: 30px;
+  text-align: center;
 }
 
 .sidebar-item .text {
   opacity: 0;
-  transition: opacity 0.3s ease;
-  white-space: nowrap;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .sidebar:hover .sidebar-item .text {
   opacity: 1;
 }
 
-.sidebar-item.logout {
-  margin-top: auto;
-  font-weight: bold;
-  color: #ff4d4f;
-}
-
-.sidebar-item.logout:hover {
-  background: rgba(255, 77, 79, 0.1);
-  color: #cc0000;
-}
-
-/* Contenido Principal */
+/* ================== CONTENIDO PRINCIPAL ================== */
 .content {
-  margin-left: 70px; /* Mantén espacio cuando la barra está cerrada */
+  margin-left: 80px;
   padding: 20px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Centrar gráficas hacia arriba */
-  align-items: center; /* Centrar horizontalmente */
+  align-items: center;
 }
 
-.sidebar:hover ~ .content {
-  margin-left: 70px; /* El contenido no se mueve cuando la barra se expande */
-}
-
-.content-header {
-  text-align: center;
+/* ================== TÍTULOS ================== */
+h1 {
+  font-size: 1.8rem;
+  color: #002f6c;
+  font-weight: bold;
   margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.content-header h1 {
-  font-size: 1.8rem; /* Tamaño ajustado */
-  color: #003366;
-  font-weight: bold;
-  transition: color 0.3s ease;
+h3 {
+  color: #003b80;
 }
 
-.content-header h1:hover {
-  color: #1e88a7; /* Resalta el texto al pasar el cursor */
-}
-
-/* Grid para las gráficas */
-.graphs-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tres columnas para tres gráficas */
-  grid-gap: 20px; /* Espaciado entre gráficas */
-  padding: 20px;
-  box-sizing: border-box;
-  align-items: center;
-  justify-items: center;
-}
-
-/* Ajuste de las gráficas */
-.graph-box {
-  background: linear-gradient(145deg, #001f33, #003f66); /* Azul marino */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+/* ================== TABLA DE SOLICITUDES ================== */
+.table-container {
+  width: 97%;
+  max-height: 75vh; /* Ajustado para mayor altura */
+  overflow-y: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  width: 300px; /* Tamaño ajustado */
-  height: 300px; /* Altura proporcional */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.graph-box:hover {
-  transform: translateY(-5px); /* Eleva ligeramente al pasar el cursor */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-}
-
-/* Títulos de las gráficas */
-.graph-box h3 {
-  color: #fff;
-  margin-bottom: 10px;
-  font-size: 1rem; /* Tamaño ajustado */
-  text-align: center;
-}
-
-/* Canvas para las gráficas */
-.graph-box canvas {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  height: 90%; /* Altura proporcional */
-}
-
-/* Ajustes responsivos para pantallas pequeñas */
-@media (max-width: 768px) {
-  .graphs-container {
-    grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
-  }
-  .graph-box {
-    width: 250px; /* Tamaño reducido en móvil */
-    height: 250px;
-  }
-  .graph-box canvas {
-    height: 80%; /* Canvas más pequeño */
-  }
-}
-
-/* tabla de solicitudes y usuarios comentario LAAZ   */
-/* Tablas de Solicitudes y Usuarios */
-.creditos-table,
-.usuarios-table {
-  width: 90%; /* Ancho mayor para más espacio */
+.creditos-table {
+  width: 100%;
   border-collapse: collapse;
-  margin: 20px auto;
-  background: #001f33; /* Azul marino profundo */
-  border-radius: 10px;
-  overflow: hidden; /* Ocultar bordes fuera del radio */
-  box-shadow: 0 0 20px rgba(22, 199, 154, 0.8); /* Sombra verde fosforescente */
+  background: white;
 }
 
-.creditos-table th,
-.usuarios-table th {
-  padding: 12px 15px;
-  background: #002b4f; /* Azul marino más oscuro */
-  color: #fff;
-  font-size: 0.9rem;
-  text-transform: uppercase;
+.creditos-table th {
+  padding: 10px;
+  background: #0056b3;
+  color: white;
+  font-size: 14px;
   text-align: center;
-  font-weight: bold;
-  border-bottom: 2px solid #16c79a; /* Verde brillante */
+  border-bottom: 2px solid #004080;
+  position: relative;
 }
 
-.creditos-table td,
-.usuarios-table td {
-  padding: 10px 15px;
-  color: #e0e0e0; /* Texto gris claro */
-  font-size: 0.85rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea sutil */
-  text-align: center;
-}
-
-/* Efectos de Hover */
-.creditos-table tr:hover,
-.usuarios-table tr:hover {
-  background: linear-gradient(
-    145deg,
-    #003f66,
-    #002b4f
-  ); /* Efecto degradado al pasar el cursor */
-  transform: scale(1.01); /* Ligeramente más grande */
-  transition: all 0.3s ease;
-}
-
-.creditos-table th:hover,
-.usuarios-table th:hover {
-  background-color: #16c79a; /* Fondo verde brillante */
-  color: #001f33; /* Texto azul marino */
-}
-
-/* Botón de Filtro */
-.filter-button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 20px;
-  background: linear-gradient(145deg, #16c79a, #13a67f);
+.creditos-table th .filter-btn {
+  background: none;
   border: none;
-  border-radius: 25px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  margin-left: 5px;
 }
 
-.filter-button:hover {
-  transform: translateY(-3px); /* Sube un poco */
-  background: #13a67f; /* Verde más oscuro */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Sombra más profunda */
+.creditos-table th .filter-btn:hover {
+  color: #16c79a;
 }
 
-/* ESTILO de paginacion */
+.creditos-table td {
+  padding: 10px;
+  color: #003366;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid #d9e2ef;
+  white-space: nowrap;
+}
 
+.creditos-table tr:hover {
+  background: rgba(0, 85, 170, 0.1);
+  transition: background 0.3s ease-in-out;
+}
+
+/* ================== PAGINACIÓN ================== */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .pagination button {
   background: linear-gradient(145deg, #16c79a, #13a67f);
-  color: #fff;
+  color: white;
   border: none;
   border-radius: 20px;
-  padding: 10px 15px;
+  padding: 8px 15px;
   margin: 5px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 12px;
   font-weight: bold;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pagination button.active {
   background: #1e88a7;
-  color: #fff;
 }
 
 .pagination button:hover {
   transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ================== FILTRO Y BÚSQUEDA ================== */
+.filter-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.search-box {
+  width: 300px;
+  padding: 10px;
+  border: 2px solid #0056b3;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #003b80;
+}
+
+.search-box:focus {
+  border-color: #16c79a;
+  outline: none;
+}
+
+/* ================== CUADRO INFERIOR ================== */
+.info-box {
+  width: 97%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.info-box h3 {
+  color: #0056b3;
+  font-size: 16px;
+}
+
+.info-box p {
+  font-size: 14px;
+  color: #003366;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .sidebar:hover {
+    width: 100%;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .creditos-table {
+    font-size: 12px;
+  }
+
+  .search-box {
+    width: 90%;
+  }
 }

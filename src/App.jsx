@@ -25,6 +25,8 @@ import AccessDenied from "./AccessDenied"; // Ajusta la ruta según la estructur
 const Home = () => {
   const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
 
+  const [faqOpen, setFaqOpen] = useState(null);
+
   // Inicializar AOS
   useEffect(() => {
     AOS.init({
@@ -63,7 +65,7 @@ const Home = () => {
       >
         <div className="container py-5">
           <h1 className="display-3 fw-bold mb-3" data-aos="fade-down">
-            Bienvenido a <span className="text-gradient">Lauter</span>
+            Bienvenido a <span className="text-gradient">Finsentia</span>
           </h1>
           <p className="lead mb-4" data-aos="fade-right">
             Impulsando el acceso a crédito justo y transparente para las PYMEs
@@ -71,9 +73,6 @@ const Home = () => {
           </p>
           <div className="cta-buttons" data-aos="fade-up">
             <button className="btn btn-primary btn-lg mx-2">Conócenos</button>
-            <button className="btn btn-outline-light btn-lg mx-2">
-              Aprende Más
-            </button>
           </div>
         </div>
 
@@ -95,8 +94,8 @@ const Home = () => {
               <p className="text-muted">
                 Nuestra misión es revolucionar el acceso a crédito con
                 soluciones simples, personalizadas y transparentes para pequeñas
-                y medianas empresas. Ofrecemos herramientas técnicas y
-                financieras que empoderan la toma de decisiones.
+                y medianas empresas. Ofrecemos estructuras de créditos desde 1
+                hasta 100 millones de pesos MXN.
               </p>
               <button className="btn btn-primary mt-3">Descubre Más</button>
             </div>
@@ -111,10 +110,56 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Sección Productos */}
+      {/* Sección Productos */}
+      <section id="productos">
+        <div className="container">
+          <h2 className="section-title" data-aos="fade-up">
+            Nuestros Productos
+          </h2>
+          <div className="product-container">
+            {[
+              {
+                title: "Crédito Simple",
+                details: [
+                  "Financiamiento flexible para empresas.",
+                  "Respaldado con garantías reales.",
+                ],
+              },
+              {
+                title: "Arrendamiento Puro",
+                details: [
+                  "Ideal para adquisición de activos.",
+                  "Beneficios fiscales atractivos.",
+                ],
+              },
+              {
+                title: "Deuda Convertible",
+                details: [
+                  "Alternativa de financiamiento híbrida.",
+                  "Opción de convertir deuda en capital.",
+                ],
+              },
+            ].map((producto, index) => (
+              <div className="product-card" key={index}>
+                <h4 className="product-title">{producto.title}</h4>
+                <ul className="product-list">
+                  {producto.details.map((detail, i) => (
+                    <li key={i}>{detail}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="columns" className="py-5 text-center" data-aos="fade-up">
         <div className="container expanded-section position-relative">
-          <h2 className="mb-5">Simplificamos el proceso</h2>
-          <h3 className="mb-5">1. Onboarding & Fondeo simple</h3>
+          <h2 className="mb-5">Nuestra Propuesta de Valor</h2>
+          <h3 className="mb-5">
+            Eliminar fricciones en el proceso de Crédito tradicional
+          </h3>
           {/* Rayo eléctrico */}
           <div className="arrow-electric"></div>
 
@@ -123,22 +168,22 @@ const Home = () => {
               {
                 title: "Registro",
                 icon: "fas fa-briefcase",
-                details: "Llena el formulario y haz tu cuenta de Empresa.",
+                details: "Envía tu solicitud.",
               },
               {
                 title: "Análisis y Preoferta",
                 icon: "fas fa-chart-line",
-                details: "Obtén preoferta en minutos.",
+                details: "Revisa preoferta en segundos.",
               },
               {
                 title: "Due Diligence",
                 icon: "fas fa-users",
-                details: "Optimizamos procesos para darte una oferta formal.",
+                details: "Completa tu documentación y obtén oferta formal.",
               },
               {
                 title: "Fondeo",
                 icon: "fas fa-wallet",
-                details: "La Empresa Promovida Obtiene los recursos.",
+                details: "Tu Empresa recibe la línea de crédito.",
               },
               {
                 title: "Escala",
@@ -174,16 +219,15 @@ const Home = () => {
         </div>
       </section>
 
-      {/*  Sección por agregar    */}
-
+      {/* Sección Modelo de Negocio */}
       {/*  Modelo de Negocio Sección   */}
       <section id="modelo" className="py-5 text-center modelo-section">
         <div className="container">
           {/* Título y descripción */}
-          <h1 className="mb-4">Nuestro Modelo</h1>
+          <h1 className="mb-4"></h1>
           <p className="lead mb-5">
-            Analizamos 4 variables para otorgar crédito inmediato a la pequeña
-            empresa.
+            Nuestro Modelo analiza 4 variables para agilizar oferta de crédito a
+            la pequeña y mediana empresa.
           </p>
 
           {/* Cuatro cajas principales */}
@@ -225,51 +269,73 @@ const Home = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Subtítulo */}
-          <h2 className="mt-5 mb-4 subtitulo">
-            Empresas con las que trabajamos:
-          </h2>
-
-          {/* Dos cajas adicionales */}
-          <div className="row">
+      {/* Sección FAQ Mejorada */}
+      <section id="faq" className="faq-section text-center">
+        <div className="container">
+          <h2 className="mb-4">Preguntas Frecuentes</h2>
+          <div className="faq-container">
             {[
               {
-                title: "Crowdlink",
-                content: [
-                  "Líder en Crowd Equity & Crowdlending para Pymes.",
-                  "Fintech Regulada por CNBV: PorCuanto S.A. de C.V., IFC.",
-                ],
-                imgSrc: crowdlinkImg, // Imagen local importada
+                question: "¿Cómo funciona el crédito?",
+                answer:
+                  "Nuestro proceso es 100% digital. Regístrate, llena tu solicitud y recibe una preoferta en minutos.",
               },
               {
-                title: "Pimx",
-                content: [
-                  "Fondo Privado de Deuda para la Mediana Empresa en México.",
-                  "Créditos con garantías Reales de $10MM hasta $250MM.",
-                ],
-                imgSrc: pimxImg, // Imagen local importada
+                question: "¿Cuánto tarda la aprobación?",
+                answer:
+                  "El análisis inicial es inmediato. La aprobación final depende de la validación de documentos.",
+              },
+              {
+                question: "¿Cuáles son los requisitos?",
+                answer:
+                  "RFC, estados financieros recientes y un historial crediticio saludable.",
+              },
+              {
+                question: "¿Qué tasas de interés manejan?",
+                answer:
+                  "Depende del perfil de riesgo, pero ofrecemos tasas desde el 12% anual.",
+              },
+              {
+                question: "¿Cómo se paga el crédito?",
+                answer:
+                  "Las mensualidades se depositan directament a nosotros para pago de intereses y/o amortizaciones.",
+              },
+              {
+                question: "¿Puedo solicitar un monto mayor?",
+                answer:
+                  "Sí, con base en tu historial de pagos y análisis financiero, puedes acceder a montos mayores.",
+              },
+              {
+                question: "¿Tienen restricciones por industria?",
+                answer:
+                  "No financiamos empresas relacionadas con financiamiento, criptomonedas o armas.",
+              },
+              {
+                question: "¿Qué pasa si no puedo pagar?",
+                answer:
+                  "Contamos con programas de reestructuración de pagos. Contáctanos para evaluar opciones.",
               },
             ].map((item, index) => (
-              <div className="col-md-6 mb-4" key={index}>
-                <div className="card empresa-card">
-                  <div className="card-body text-center">
-                    <img
-                      src={item.imgSrc}
-                      alt={`Logotipo de ${item.title}`}
-                      className={`empresa-img mb-3 ${
-                        item.title === "Crowdlink" ? "zoom-out" : ""
-                      }`}
-                    />
-                    <h5 className="empresa-title">
-                      {item.title} <span className="blinking-dot"></span>
-                    </h5>
-                    <ul className="empresa-content">
-                      {item.content.map((point, idx) => (
-                        <li key={idx}>{point}</li>
-                      ))}
-                    </ul>
-                  </div>
+              <div
+                key={index}
+                className={`faq-box ${faqOpen === index ? "open" : ""}`}
+                onClick={() => setFaqOpen(faqOpen === index ? null : index)}
+              >
+                <div className="faq-question">
+                  <h5>{item.question}</h5>
+                  <i
+                    className={`fas ${
+                      faqOpen === index ? "fa-chevron-up" : "fa-chevron-down"
+                    }`}
+                  ></i>
+                </div>
+                <div
+                  className={`faq-answer ${faqOpen === index ? "show" : ""}`}
+                >
+                  <p>{item.answer}</p>
                 </div>
               </div>
             ))}
@@ -293,7 +359,7 @@ const Home = () => {
             <div className="col-md-3">
               <h5>Contacto</h5>
               <p>Tel: +52 55 5551609091</p>
-              <p>Email: contacto@[AQUI VA NOMBRE NUEVO].com.mx</p>
+              <p>Email: contacto@i2.com.mx</p>
               <p>Dirección:</p>
               <p>
                 Tiburcio Montiel 89, Colonia San Miguel Chapultepec, Miguel
@@ -350,7 +416,7 @@ const Home = () => {
                     rel="noopener noreferrer"
                     className="footer-link"
                   >
-                    PiMX Fondo de Deuda
+                    PiMX
                   </a>
                 </li>
                 <li>
@@ -379,12 +445,7 @@ const Home = () => {
             {/* Síguenos */}
             <div className="col-md-3">
               <h5>Síguenos</h5>
-              <a href="#" className="footer-link me-3">
-                <i className="fab fa-reddit"></i>
-              </a>
-              <a href="#" className="footer-link me-3">
-                <i className="fab fa-twitter"></i>
-              </a>
+
               <a href="#" className="footer-link">
                 <i className="fab fa-linkedin-in"></i>
               </a>
@@ -401,11 +462,11 @@ const Home = () => {
             <div className="col text-center">
               <p className="small">
                 Infraestructura en Finanzas AI, Sociedad Anónima Promotora de
-                Inversión de Capital Variable, ("Lauter"), para su constitución
-                y operación con tal carácter, no requiere de autorización de la
-                Secretaría de Hacienda y Crédito Público. Lauter ©. Todos los
-                derechos reservados. Prohibida la reproducción total o parcial
-                del contenido de este sitio. * Todo el análisis es generado con
+                Inversión de Capital Variable, (""), para su constitución y
+                operación con tal carácter, no requiere de autorización de la
+                Secretaría de Hacienda y Crédito Público.©. Todos los derechos
+                reservados. Prohibida la reproducción total o parcial del
+                contenido de este sitio. * Todo el análisis es generado con
                 herramientas y desarrollo interno.
               </p>
             </div>
@@ -416,14 +477,14 @@ const Home = () => {
           <div className="row mt-4">
             <div className="col text-center">
               <p className="footer-credits small">
-                Desarrollado por{" "}
+                Desarrollado{" "}
                 <a
                   href="https://www.linkedin.com/in/luis-armando-alvarez-zapfe-201217137/?originalSubdomain=mx"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-link"
                 >
-                  Luis Armando Alvarez Zapfe
+                  internamente
                 </a>{" "}
                 con{" "}
                 <a

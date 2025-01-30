@@ -34,32 +34,38 @@
 }
 
 /* ================== Start Box ================== */
+
 .start-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar verticalmente */
+  align-items: center; /* Centrar horizontalmente */
+  height: 200px; /* Ajusta el tamaño según lo necesites */
   text-align: center;
   padding: 20px;
-  background-color: #16c79a; /* Verde fosforescente */
-  color: #000;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #0ff622;
+  background-color: none;
+  color: white;
 }
 
 .start-button {
+  display: block; /* Asegura que el botón se comporte como un bloque */
+  margin: 20px auto; /* Centra horizontalmente */
   padding: 10px 20px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #fff;
-  background: linear-gradient(145deg, #16c79a, #16c79a);
+  color: #fff !important;
+  background-color: #16c79a;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0 0 15px #0ff622;
+  box-shadow: 0 0 15px #00bfff;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .start-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 20px #00ff00;
+  box-shadow: 0 0 20px #00bfff;
+  color: #fff !important;
 }
 
 /* ================== Formulario ================== */

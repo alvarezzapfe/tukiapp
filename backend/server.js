@@ -1,35 +1,43 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const sequelize = require("./config/database");
 
+// Importar rutas
+const authRoutes = require("./routes/authRoutes");
+const solicitudesRoutes = require("./routes/solicitudesRoutes");
+
 dotenv.config();
 
-const app = express(); // ✅ Primero definimos `app`
+const app = express(); // ✅ Inicializamos Express
 
-// Middleware
-app.use(express.json()); // ✅ Ahora sí podemos usarlo
+// ✅ Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // Ya maneja JSON, no se necesita `bodyParser.json()`
 
-// Rutas
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/solicitudes", require("./routes/solicitudesRoutes"));
+// ✅ Definir rutas
+app.use("/api/auth", authRoutes);
+app.use("/api/solicitudes", solicitudesRoutes);
 
-// Sincronizar los modelos con la base de datos
-(async () => {
+// ✅ Sincronizar modelos con la base de datos
+const iniciarServidor = async () => {
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.authenticate();
+    console.log("✅ Conexión a MySQL establecida correctamente.");
+
+    await sequelize.sync({ alter: true }); // 🔹 Mantiene los cambios sin borrar datos
     console.log("✅ Modelos sincronizados con la base de datos.");
+
+    // Configuración del puerto
+    const PORT = process.env.PORT || 5001;
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+    });
   } catch (error) {
-    console.error("⚠️ Error al sincronizar modelos:", error);
+    console.error("❌ Error al conectar con la base de datos:", error);
+    process.exit(1); // Si hay un error, detiene la ejecución
   }
-})();
+};
 
-// Configuración del puerto
-const PORT = process.env.PORT || 5001;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
-});
+// ✅ Iniciar el servidor
+iniciarServidor();

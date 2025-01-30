@@ -34,6 +34,12 @@ const Login = () => {
       return;
     }
 
+    console.log("Datos enviados al backend:", {
+      email: formData.email,
+      password: formData.password,
+      role: activeTab,
+    });
+
     try {
       // Agregar el rol activo (cliente o admin) al formData
       const response = await axios.post(
@@ -43,6 +49,8 @@ const Login = () => {
           role: activeTab, // "cliente" o "admin"
         }
       );
+
+      console.log("Respuesta del backend:", response.data);
 
       const { token, user } = response.data;
 

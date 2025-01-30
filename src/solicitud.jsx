@@ -216,7 +216,7 @@ const Solicitud = () => {
               className="start-button"
               onClick={() => setStep(1)}
               style={{
-                backgroundColor: "#00FF00",
+                backgroundColor: "#16c79a",
                 color: "#000",
                 fontWeight: "bold",
               }}
