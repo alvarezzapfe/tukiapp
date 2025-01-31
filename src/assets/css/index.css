@@ -1,17 +1,18 @@
-/* General Styles */
+/* =================== GLOBAL TYPOGRAPHY =================== */
 body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-
-  color: #d4f1f4; /* Verde azulado claro */
-  background-color: #1b1f3b; /* Azul marino oscuro */
+  background-color: white;
+  color: #001f3f;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Previene el desplazamiento horizontal */
 }
 
+/* Fuente y color global para títulos */
 h1,
 h2,
 h3,
@@ -19,6 +20,18 @@ h4,
 h5,
 h6 {
   font-family: "Roboto", sans-serif;
+  color: #003b80; /* Azul profundo */
+}
+
+/* Fuente y color global para subtítulos */
+.section-subtitle {
+  font-size: 1.8rem;
+  color: #4e6a82; /* Azul oscuro suave */
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  max-width: 70%;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 /*  Evitar desbordamiento en versiones mobiles   */
@@ -274,220 +287,376 @@ html {
   }
 }
 
-/* Navbar Styles en archivo separado */
-
-/* About Section */
-#about {
-  padding: 150px 20px; /* Espaciado ajustado */
-  background: linear-gradient(135deg, #f5f5f5, #e8f0fe); /* Gradiente suave */
-  color: #333;
-  text-align: center;
-}
-
-#about h2 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-#about p {
-  font-size: 1.2rem;
-  color: #666;
-  line-height: 1.6;
-}
-
-#about img {
-  max-width: 80%;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-#about .btn-primary {
-  background-color: #007bff;
+/* Botón general */
+.btn-primary {
+  align-items: center;
+  background: linear-gradient(90deg, #16c79a, #13a67f);
   border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 50px;
-  transition: background-color 0.3s ease;
-}
-
-#about .btn-primary:hover {
-  background-color: #0056b3;
-}
-
-/*  Sección Productos  */
-
-/* Sección Productos */
-#productos {
-  background-color: #ffffff;
-  padding: 70px 0;
-  color: #001f3f;
-  text-align: center;
-}
-
-#productos h1 {
-  font-size: 3rem;
+  padding: 12px 25px;
+  font-size: 1.2rem;
   font-weight: bold;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(22, 199, 154, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #13a67f, #16c79a);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(22, 199, 154, 0.5);
+}
+
+/* =================== SECCIONES GENERALES =================== */
+.section-container {
+  background-color: #ffffff;
+  padding: 140px 0; /* Aumentamos el tamaño vertical */
   color: #001f3f;
+}
+
+.section-title {
+  font-size: 3rem; /* Aumentamos el tamaño del título */
+  font-weight: bold;
+  color: #002855; /* Azul marino más oscuro */
   text-align: center;
+  font-family: "nunito", sans-serif;
+}
+
+/* Ajustar la letra y el tamaño de las áreas */
+.section-text {
+  font-size: 1.4rem; /* Hacemos la letra más grande */
+  color: #003b80; /* Azul oscuro más visible */
+  text-align: center;
+  line-height: 1.8; /* Más espaciado para mejor lectura */
+  max-width: 80%; /* Ampliamos el área del contenido */
+  margin: 0 auto;
+  font-family: "nunito", sans-serif;
+}
+
+/* =================== ABOUT SECTION (MODERNO Y PROFESIONAL) =================== */
+.about-section {
+  background-color: #ffffff; /* Fondo blanco limpio */
+  padding: 120px 0;
+  color: #003b80;
+  text-align: center;
+}
+
+/* Título Principal */
+.about-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #002855; /* Azul marino oscuro */
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+/* Subtítulo con efecto de animación */
+.about-subtitle {
+  font-size: 1.8rem;
+  color: #16c79a; /* Verde menta brillante */
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Contenedor del texto */
+.about-text-container {
+  text-align: left;
+  padding: 20px;
+}
+
+/* Párrafos */
+.about-text {
+  font-size: 1.3rem;
+  color: #1e2a38;
+  font-family: "Lato", sans-serif;
+  line-height: 1.7;
   margin-bottom: 20px;
 }
 
-.product-container {
+/* Botón con efecto moderno */
+.about-btn {
+  background: linear-gradient(90deg, #16c79a, #13a67f);
+  border: none;
+  padding: 14px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 0 5px 15px rgba(22, 199, 154, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.about-btn:hover {
+  background: linear-gradient(90deg, #13a67f, #16c79a);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(22, 199, 154, 0.5);
+}
+
+/* Contenedor de la imagen */
+.about-image-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  max-width: 2000px;
-  margin: 0 auto;
-}
-
-.product-card {
-  background: linear-gradient(145deg, #dff3f5, #bfe4e7);
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  padding: 30px;
-  width: 340px;
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
 }
 
-.product-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.3);
-}
-
-.product-card .icono {
-  font-size: 3.5rem;
-  color: #16c79a;
-  margin-bottom: 15px;
-}
-
-.product-card h5 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #003b80;
-  margin-bottom: 15px;
-}
-
-.product-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-  width: 100%;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #1e2a38;
-}
-
-.product-list li {
+/* Contenedor con efecto de sombra y flotación */
+.about-image-wrapper {
   position: relative;
-  padding-left: 30px;
-  margin-bottom: 10px;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #dff3f5, #bfe4e7);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
 }
 
-.product-list li::before {
-  content: "\2714";
-  color: #16c79a;
-  font-size: 1.5rem;
-  font-weight: bold;
-  position: absolute;
-  left: 0;
+.about-image-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Ajustes Responsivos */
-@media (max-width: 1024px) {
-  .product-card {
-    width: 90%;
-    min-height: auto;
+/* Imagen */
+.about-image {
+  max-width: 90%;
+  border-radius: 15px;
+}
+
+/* =================== ANIMACIONES =================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================== RESPONSIVE DESIGN =================== */
+@media (max-width: 992px) {
+  .about-section {
+    padding: 100px 0;
+  }
+
+  .about-title {
+    font-size: 2.8rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.6rem;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .about-image-wrapper {
+    padding: 10px;
   }
 }
 
 @media (max-width: 768px) {
-  .product-container {
-    flex-direction: column;
-    align-items: center;
+  .about-section {
+    padding: 80px 0;
   }
-  .product-card {
-    width: 100%;
-    padding: 20px;
+
+  .about-title {
+    font-size: 2.5rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .about-text-container {
+    text-align: center;
+  }
+
+  .about-image {
+    max-width: 80%;
   }
 }
 
-/* Sección Columnas */
+/* =================== PRODUCTOS SECTION (Igual a Modelo de Negocio) =================== */
+.productos-card {
+  background: linear-gradient(
+    145deg,
+    #dff3f5,
+    #bfe4e7
+  ); /* Mismos tonos azul verdoso */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  height: 280px; /* Mismo tamaño */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.productos-card:hover {
+  transform: scale(1.025);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.productos-card .icono {
+  font-size: 3rem;
+  color: #16c79a; /* Verde menta brillante */
+}
+
+.productos-card h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #003b80; /* Azul profundo */
+}
+
+.productos-card ul {
+  list-style: disc;
+  padding-left: 20px;
+  color: #1e2a38;
+  font-size: 1rem;
+}
+
+/* =================== RESPONSIVE FIXES =================== */
+@media (max-width: 992px) {
+  .section-container {
+    padding: 100px 0; /* Un poco menos en pantallas medianas */
+  }
+
+  .section-text {
+    text-align: center;
+    max-width: 90%;
+    font-size: 1.3rem; /* Un poco más grande */
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section img {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+/* =================== SECCIÓN COLUMNAS (MEJORADA) =================== */
 #columns {
-  background: linear-gradient(145deg, #001f3f, #002d6f, #003b80);
-  color: #ffffff;
-  padding: 800px 40px;
+  background: #ffffff; /* Fondo blanco */
+  padding: 100px 40px; /* Ajuste proporcional */
+  color: #001f3f;
+  position: relative;
+}
+
+/* =================== COLUMNAS - TÍTULOS =================== */
+
+/* Estilo del título principal "Nuestra Propuesta de Valor" */
+.column-title {
+  font-size: 3rem; /* Tamaño más grande */
+  font-weight: bold;
+  color: #003b80; /* Azul profundo */
+  font-family: "Montserrat", sans-serif; /* Tipografía elegante */
+  text-align: center;
+}
+
+/* Estilo del subtítulo "Eliminar fricciones..." */
+.column-subtitle {
+  font-size: 1.5rem; /* Un poco más pequeño */
+  font-weight: 600;
+  color: #16c79a; /* Verde brillante */
+  font-family: "Lato", sans-serif; /* Fuente más amigable */
+  text-align: center;
 }
 
 /* Contenedor de las cajas */
 .column-card {
-  background: rgba(17, 105, 142, 0.6);
-  color: white;
-  padding: 28px; /* Reducido al 70% de 40px */
-  width: 70%; /* Ajusta al 70% del tamaño original */
-  margin: 0 auto; /* Centra las cajas horizontalmente */
-  border-radius: 20px; /* Opcional: Ajustar bordes redondeados */
+  background: linear-gradient(
+    145deg,
+    #dff3f5,
+    #bfe4e7
+  ); /* Mismo tono azul verdoso */
+  border: none;
+  border-radius: 15px; /* Igual a Productos y Modelo */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  width: 70%;
+  margin: 0 auto;
   text-align: center;
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.3); /* Reducido proporcionalmente */
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Resaltar en hover */
 .column-card:hover {
-  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(22, 199, 154, 0.7); /* Brillo */
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Círculo de enumeración */
+/* Títulos dentro de las cajas */
+.column-card h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #003b80; /* Azul profundo, igual que Productos */
+  font-family: "nunito", sans-serif;
+}
+
+/* Texto dentro de las cajas */
+.column-card p {
+  font-size: 1rem;
+  color: #1e2a38; /* Mismo tono que Productos */
+  font-family: "Lato", sans-serif;
+  line-height: 1.6;
+}
+
+/* Iconos dentro de las cajas */
+.column-card .fas {
+  font-size: 3rem;
+  color: #16c79a; /* Verde brillante igual que en Productos */
+  margin-bottom: 15px;
+}
+
+/* Círculo de numeración (Con Color Rosa) */
 .circle-enumeration {
-  position: left;
-  top: -30px; /* Ajusta la posición del círculo */
+  position: absolute;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  background: #f48fb1;
+  background: #f48fb1; /* Rosa (como en el diseño original) */
   color: white;
-  font-size: 1.4rem; /* Reducido proporcionalmente */
+  font-size: 1.4rem;
   font-weight: bold;
   border-radius: 50%;
-  width: 42px; /* Reducido al 70% */
-  height: 42px; /* Reducido al 70% */
+  width: 42px;
+  height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2); /* Reducido proporcionalmente */
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
 }
 
-/* Línea del rayo eléctrico */
+/* =================== LÍNEA ELÉCTRICA =================== */
 .arrow-electric {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: calc(100% - 100px); /* Ajusta la altura para que no toque el footer */
+  height: 88%;
   background: linear-gradient(
     180deg,
     transparent,
     #16c79a 25%,
     transparent 50%,
-    #f4f5fa 75%
+    #f48fb1 75%
   );
   background-size: 100% 200%;
   animation: electric-flow 2s infinite linear;
-  z-index: -1; /* Debajo de las cajas */
+  z-index: -1;
 }
 
-/* Efecto de animación del rayo */
+/* Animación de la línea eléctrica */
 @keyframes electric-flow {
   0% {
     background-position: 0% 0%;
@@ -497,58 +666,72 @@ html {
   }
 }
 
-/* Brillo de las cajas al pasar el rayo */
+/* Resaltar efecto en hover */
 .column-card.highlight {
   box-shadow: 0 0 20px 10px rgba(22, 199, 154, 0.5);
   transform: scale(1.05);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+/* =================== RESPONSIVE FIXES =================== */
+@media (max-width: 992px) {
+  .column-card {
+    width: 90%;
+  }
+}
+
 @media (max-width: 768px) {
   .column-card {
-    padding: 15px;
     width: 100%;
   }
-}
 
-@media (max-width: 480px) {
-  .column-card {
-    padding: 10px;
+  .arrow-electric {
+    left: 20%;
   }
 }
 
-/* Sección Modelo de Negocio */
-.modelo-section {
+/* =================== SECCIÓN MODELO DE NEGOCIO =================== */
+.modelo-container {
   background-color: #ffffff; /* Fondo blanco */
-  padding: 100px 0;
-  color: #001f3f; /* Expandir área */
+  padding: 150px 0; /* Hacer el área más grande */
+  color: #001f3f;
 }
 
-.modelo-section h1 {
-  font-size: 2.8rem;
+/* Título Principal */
+.modelo-title {
+  font-size: 3.5rem; /* Más grande */
   font-weight: bold;
-  color: #001f3f; /* Azul marino */
+  color: #003b80; /* Azul profundo */
+  font-family: "Montserrat", sans-serif; /* Fuente moderna */
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.modelo-section p {
-  font-size: 1.2rem;
-  color: #4e6a82; /* Azul oscuro suave */
-}
-
-/* Subtítulo */
-.subtitulo {
+/* Subtítulo - Asegurar visibilidad */
+.modelo-subtitle {
   font-size: 2rem;
-  font-weight: bold;
-  color: #001f3f; /* Azul marino */
+  font-weight: 600;
+  color: #16c79a; /* Verde brillante */
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  margin-bottom: 50px;
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+  opacity: 1 !important; /* Asegura que no esté oculto */
+  display: block; /* Asegura que esté visible */
 }
 
-/* Estilo de las tarjetas */
+.modelo-subtitle {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* =================== CAJAS DEL MODELO (Mantenidas Igual) =================== */
 .modelo-card {
-  background: linear-gradient(
-    145deg,
-    #dff3f5,
-    #bfe4e7
-  ); /* Tonos azul verdoso */
+  background: linear-gradient(145deg, #dff3f5, #bfe4e7);
   border: none;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -583,10 +766,33 @@ html {
   font-size: 1rem;
 }
 
-/* Ajustes Responsivos */
+/* =================== RESPONSIVE FIXES =================== */
+@media (max-width: 992px) {
+  .modelo-container {
+    padding: 120px 0;
+  }
+
+  .modelo-title {
+    font-size: 3rem; /* Ajustamos tamaño en pantallas medianas */
+  }
+
+  .modelo-subtitle {
+    font-size: 1.8rem;
+    max-width: 90%;
+  }
+}
+
 @media (max-width: 768px) {
-  .modelo-card {
-    height: auto; /* Ajusta la altura en pantallas pequeñas */
+  .modelo-container {
+    padding: 100px 0;
+  }
+
+  .modelo-title {
+    font-size: 2.5rem;
+  }
+
+  .modelo-subtitle {
+    font-size: 1.5rem;
   }
 }
 

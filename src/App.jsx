@@ -65,7 +65,7 @@ const Home = () => {
       >
         <div className="container py-5">
           <h1 className="display-3 fw-bold mb-3" data-aos="fade-down">
-            Bienvenido a <span className="text-gradient">Finsentia</span>
+            Bienvenido a <span className="text-gradient">Lauter</span>
           </h1>
           <p className="lead mb-4" data-aos="fade-right">
             Impulsando el acceso a crédito justo y transparente para las PYMEs
@@ -82,84 +82,116 @@ const Home = () => {
           <div className="neon-effects"></div>
         </div>
       </header>
-
-      {/* Sección Acerca de */}
-      <section id="about" className="py-5 bg-light text-center">
+      {/* Sección Acerca de - About Section */}
+      <section id="about" className="about-section">
         <div className="container">
-          <h2 className="mb-4" data-aos="fade-up">
+          {/* Título Principal */}
+          <h2 className="about-title" data-aos="fade-up">
             Transformamos el Futuro Financiero
           </h2>
+
+          {/* Subtítulo con animación */}
+          <h3 className="about-subtitle" data-aos="fade-up">
+            Crédito accesible, rápido y sin fricciones para pequeñas y medianas
+            empresas.
+          </h3>
+
           <div className="row align-items-center">
-            <div className="col-lg-6 mb-4" data-aos="fade-right">
-              <p className="text-muted">
+            {/* Contenido Izquierdo (Texto y Botón) */}
+            <div
+              className="col-lg-6 about-text-container"
+              data-aos="fade-right"
+            >
+              <p className="about-text">
                 Nuestra misión es revolucionar el acceso a crédito con
-                soluciones simples, personalizadas y transparentes para pequeñas
-                y medianas empresas. Ofrecemos estructuras de créditos desde 1
-                hasta 100 millones de pesos MXN.
+                soluciones{" "}
+                <strong>simples, personalizadas y transparentes</strong>
+                para pequeñas y medianas empresas.
               </p>
-              <button className="btn btn-primary mt-3">Descubre Más</button>
+              <p className="about-text">
+                Ofrecemos estructuras de financiamiento desde{" "}
+                <strong>1 hasta 100 millones de pesos MXN</strong>, adaptadas a
+                las necesidades de crecimiento de cada negocio.
+              </p>
+              <button className="btn btn-primary about-btn">
+                Descubre Más
+              </button>
             </div>
-            <div className="col-lg-6" data-aos="fade-left">
-              <img
-                src={logo}
-                alt="Logotipo"
-                className="img-fluid rounded shadow-sm"
-              />
+
+            {/* Imagen del lado derecho con efecto flotante */}
+            <div
+              className="col-lg-6 about-image-container"
+              data-aos="fade-left"
+            >
+              <div className="about-image-wrapper">
+                <img src={logo} alt="Logotipo" className="about-image" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Sección Productos */}
-      {/* Sección Productos */}
-      <section id="productos">
+      <section id="productos" className="section-container productos-section">
         <div className="container">
-          <h2 className="section-title" data-aos="fade-up">
-            Nuestros Productos
-          </h2>
-          <div className="product-container">
+          <h2 className="section-title">Nuestros Productos</h2>
+          <p className="section-text">
+            Descubre nuestras soluciones financieras diseñadas para impulsar a
+            tu empresa.
+          </p>
+          <div className="row">
             {[
               {
                 title: "Crédito Simple",
                 details: [
-                  "Financiamiento flexible para empresas.",
+                  "Financiamiento flexible.",
                   "Respaldado con garantías reales.",
                 ],
+                icon: "fas fa-hand-holding-usd",
               },
               {
                 title: "Arrendamiento Puro",
                 details: [
-                  "Ideal para adquisición de activos.",
+                  "Ideal para activos.",
                   "Beneficios fiscales atractivos.",
                 ],
+                icon: "fas fa-car",
               },
               {
                 title: "Deuda Convertible",
                 details: [
-                  "Alternativa de financiamiento híbrida.",
+                  "Financiamiento híbrido.",
                   "Opción de convertir deuda en capital.",
                 ],
+                icon: "fas fa-exchange-alt",
               },
             ].map((producto, index) => (
-              <div className="product-card" key={index}>
-                <h4 className="product-title">{producto.title}</h4>
-                <ul className="product-list">
-                  {producto.details.map((detail, i) => (
-                    <li key={i}>{detail}</li>
-                  ))}
-                </ul>
+              <div className="col-md-6 col-lg-4 mb-4" key={index}>
+                <div className="card productos-card">
+                  <div className="card-body text-center">
+                    <i className={`${producto.icon} icono`}></i>
+                    <h5 className="card-title mt-3">{producto.title}</h5>
+                    <ul className="card-text">
+                      {producto.details.map((detail, i) => (
+                        <li key={i}>{detail}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/*  Sección Proceso y valor  */}
       <section id="columns" className="py-5 text-center" data-aos="fade-up">
         <div className="container expanded-section position-relative">
-          <h2 className="mb-5">Nuestra Propuesta de Valor</h2>
-          <h3 className="mb-5">
+          <h2 className="column-title mb-5">Nuestra Propuesta de Valor</h2>
+          <h3 className="column-subtitle mb-5">
             Eliminar fricciones en el proceso de Crédito tradicional
           </h3>
+
           {/* Rayo eléctrico */}
           <div className="arrow-electric"></div>
 
@@ -220,17 +252,17 @@ const Home = () => {
       </section>
 
       {/* Sección Modelo de Negocio */}
-      {/*  Modelo de Negocio Sección   */}
-      <section id="modelo" className="py-5 text-center modelo-section">
+      <section id="modelo" className="modelo-container">
         <div className="container">
-          {/* Título y descripción */}
-          <h1 className="mb-4"></h1>
-          <p className="lead mb-5">
-            Nuestro Modelo analiza 4 variables para agilizar oferta de crédito a
-            la pequeña y mediana empresa.
-          </p>
+          {/* Título y Subtítulo */}
+          <h2 className="modelo-title" data-aos="fade-up">
+            Nuestro Modelo de Negocio
+          </h2>
+          <h3 className="modelo-subtitle">
+            Analizamos 4 variables clave para agilizar tu acceso a crédito
+          </h3>
 
-          {/* Cuatro cajas principales */}
+          {/* Cuatro cajas principales (SIN MODIFICAR) */}
           <div className="row">
             {[
               {
