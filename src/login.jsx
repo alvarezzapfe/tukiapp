@@ -147,9 +147,9 @@ const Login = () => {
             <div className="col text-center">
               <p className="small">
                 Infraestructura en Finanzas AI, Sociedad Anónima Promotora de
-                Inversión de Capital Variable, ("Tuki"), para su constitución y
-                operación con tal carácter, no requiere de autorización de la
-                Secretaría de Hacienda y Crédito Público. Tuki ©. Todos los
+                Inversión de Capital Variable, ("Lauter"), para su constitución
+                y operación con tal carácter, no requiere de autorización de la
+                Secretaría de Hacienda y Crédito Público. Lauter ©. Todos los
                 derechos reservados. Prohibida la reproducción total o parcial
                 del contenido de este sitio. * Todo el análisis es generado con
                 herramientas y desarrollo interno.
@@ -159,14 +159,14 @@ const Login = () => {
           <div className="row mt-4">
             <div className="col text-center">
               <p className="footer-credits small">
-                Desarrollado por{" "}
+                Desarrollado{" "}
                 <a
                   href="https://www.linkedin.com/in/luis-armando-alvarez-zapfe-201217137/?originalSubdomain=mx"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-link"
                 >
-                  Luis Armando Alvarez Zapfe
+                  Internamente
                 </a>{" "}
                 con{" "}
                 <a

@@ -21,6 +21,7 @@ import "@fontsource/poppins"; // Estilo normal
 import "@fontsource/poppins/600.css"; // Estilo bold
 import ProtectedRoute from "./ProtectedRoute"; // Ajusta la ruta según dónde creaste el archivo
 import AccessDenied from "./AccessDenied"; // Ajusta la ruta según la estructura de tu proyecto
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [activeCard, setActiveCard] = useState(-1); // Caja activa para animaciones
@@ -58,30 +59,41 @@ const Home = () => {
     <div>
       <Navbar />
       {/* Sección Hero */}
-      <header
-        id="hero"
-        className="hero_area text-center text-white"
-        data-aos="fade-up"
-      >
-        <div className="container py-5">
-          <h1 className="display-3 fw-bold mb-3" data-aos="fade-down">
-            Bienvenido a <span className="text-gradient">Lauter</span>
-          </h1>
-          <p className="lead mb-4" data-aos="fade-right">
-            Impulsando el acceso a crédito justo y transparente para las PYMEs
-            en México.
+
+      <header id="hero" className="hero_section">
+        <div className="hero_content">
+          <h2 className="hero_title" data-aos="fade-up">
+            <span className="highlight">Transformamos</span> el Acceso a Crédito
+            para las Empresas
+          </h2>
+          <p className="hero_subtitle" data-aos="fade-up">
+            Nuestra plataforma impulsa el crecimiento de las PYMEs más
+            innovadoras a través de soluciones de{" "}
+            <span className="green-highlight">Crédito y Leasing</span>.
           </p>
-          <div className="cta-buttons" data-aos="fade-up">
-            <button className="btn btn-primary btn-lg mx-2">Conócenos</button>
+          <div className="hero_cta" data-aos="fade-up">
+            <button
+              className="hero_btn secondary"
+              onClick={() =>
+                document
+                  .getElementById("productos")
+                  .scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Explora Soluciones
+            </button>
           </div>
         </div>
 
-        {/* Contenedor de gráficos y dashboard */}
-        <div className="hero-visuals">
-          <img src={logo} alt="Logotipo" className="logo-small" />
-          <div className="neon-effects"></div>
+        {/* Fondo interactivo */}
+        <div className="hero_background">
+          <div className="node node-1"></div>
+          <div className="node node-2"></div>
+          <div className="line line-1"></div>
+          <div className="line line-2"></div>
         </div>
       </header>
+
       {/* Sección Acerca de - About Section */}
       <section id="about" className="about-section">
         <div className="container">
@@ -110,7 +122,7 @@ const Home = () => {
               </p>
               <p className="about-text">
                 Ofrecemos estructuras de financiamiento desde{" "}
-                <strong>1 hasta 100 millones de pesos MXN</strong>, adaptadas a
+                <strong> 1 hasta 100 millones de pesos MXN</strong>, adaptadas a
                 las necesidades de crecimiento de cada negocio.
               </p>
               <button className="btn btn-primary about-btn">
@@ -130,7 +142,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Sección Productos */}
       <section id="productos" className="section-container productos-section">
         <div className="container">
@@ -183,14 +194,14 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/*  Sección Proceso y valor  */}
+      {/*  Sección Columnas  */}
       <section id="columns" className="py-5 text-center" data-aos="fade-up">
         <div className="container expanded-section position-relative">
           <h2 className="column-title mb-5">Nuestra Propuesta de Valor</h2>
-          <h3 className="column-subtitle mb-5">
-            Eliminar fricciones en el proceso de Crédito tradicional
-          </h3>
+          <p className="section-text">
+            Simplificamos el proceso de onboarding, KYC, & due diligence para
+            mejorar la experiencia de Crédito PyME.
+          </p>
 
           {/* Rayo eléctrico */}
           <div className="arrow-electric"></div>
@@ -250,7 +261,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Sección Modelo de Negocio */}
       <section id="modelo" className="modelo-container">
         <div className="container">
@@ -258,9 +268,12 @@ const Home = () => {
           <h2 className="modelo-title" data-aos="fade-up">
             Nuestro Modelo de Negocio
           </h2>
-          <h3 className="modelo-subtitle">
-            Analizamos 4 variables clave para agilizar tu acceso a crédito
-          </h3>
+          <p className="section-text">
+            Analizamos las siguientes métricas para determinar si una Empresa
+            Promovida es sujeto de Crédito.
+          </p>
+          <p> </p>
+          <b></b>
 
           {/* Cuatro cajas principales (SIN MODIFICAR) */}
           <div className="row">
@@ -303,11 +316,14 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Sección FAQ Mejorada */}
       <section id="faq" className="faq-section text-center">
         <div className="container">
-          <h2 className="mb-4">Preguntas Frecuentes</h2>
+          <h2 className="faq-title" data-aos="fade-up">
+            Preguntas Frecuentes
+          </h2>
+          <p className="faq-subtitle" data-aos="fade-up"></p>
+
           <div className="faq-container">
             {[
               {
@@ -405,13 +421,13 @@ const Home = () => {
               <h5>Enlaces</h5>
               <ul className="list-unstyled">
                 <li>
-                  <a href="#inicio" className="footer-link">
+                  <a href="#hero" className="footer-link">
                     Inicio
                   </a>
                 </li>
                 <li>
-                  <a href="#acerca" className="footer-link">
-                    Acerca de
+                  <a href="productos" className="footer-link">
+                    Productos
                   </a>
                 </li>
                 <li>

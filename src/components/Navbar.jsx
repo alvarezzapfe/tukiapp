@@ -31,7 +31,11 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <Link
+          to="/"
+          className="navbar-logo"
+          onClick={() => handleScroll("hero")}
+        >
           <img src={logo} alt="Logotipo" className="navbar-logo-image" />
           <span className="navbar-logo-text">Lauter</span>
         </Link>
@@ -44,9 +48,12 @@ const Navbar = () => {
 
         <ul className={`navbar-menu ${menuOpen ? "show" : ""}`}>
           <li>
-            <Link to="/" onClick={() => setMenuOpen(false)}>
+            <button
+              className="navbar-link"
+              onClick={() => handleScroll("hero")}
+            >
               Inicio
-            </Link>
+            </button>
           </li>
           <li>
             <button
@@ -59,7 +66,7 @@ const Navbar = () => {
           <li>
             <button
               className="navbar-link"
-              onClick={() => handleScroll("columns")}
+              onClick={() => handleScroll("productos")}
             >
               Productos
             </button>
@@ -70,6 +77,11 @@ const Navbar = () => {
               onClick={() => handleScroll("modelo")}
             >
               Modelo
+            </button>
+          </li>
+          <li>
+            <button className="navbar-link" onClick={() => handleScroll("faq")}>
+              FAQ
             </button>
           </li>
           <li>
